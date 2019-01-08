@@ -1,0 +1,22 @@
+{
+  "name": "pi-term",
+  "version": "1.0.0",
+  "description": "An HTML and CSS wrapper to send commands to my Raspberry Pis",
+  "main": "index.js",
+  "scripts": {
+    "server": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xoreo/pi-term.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xoreo/pi-term/issues"
+  },
+  "homepage": "https://github.com/xoreo/pi-term#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
