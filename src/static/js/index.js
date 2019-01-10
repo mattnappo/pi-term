@@ -10,26 +10,22 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
     var output_ = document.querySelector(outputContainer);
     var cmdLine_ = document.querySelector(cmdLineContainer);
 
-    var fs_ = null;
-    var cwd_ = null;
     var history_ = [];
     var histpos_ = 0;
     var histtemp_ = 0;
 
-    window.addEventListener('click', function (e) {
+    window.addEventListener("click", function (e) {
         cmdLine_.focus();
     }, false);
 
-    cmdLine_.addEventListener('click', inputTextClick_, false);
-    cmdLine_.addEventListener('keydown', historyHandler_, false);
-    cmdLine_.addEventListener('keydown', processNewCommand_, false);
+    cmdLine_.addEventListener("click", inputTextClick_, false);
+    cmdLine_.addEventListener("keydown", historyHandler_, false);
+    cmdLine_.addEventListener("keydown", processNewCommand_, false);
 
-    //
     function inputTextClick_(e) {
         this.value = this.value;
     }
 
-    //
     function historyHandler_(e) {
         if (history_.length) {
             if (e.keyCode == 38 || e.keyCode == 40) {
@@ -59,15 +55,14 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
         }
     }
 
-    function Getoutput() {
-        return output_
+    function output(html) {
+        output_.insertAdjacentHTML("beforeEnd", "<p>" + html + "</p>");
     }
-    //
-    function processNewCommand_(e) {
 
+    function processNewCommand_(e) {
+        // Implement tab suggestions
         if (e.keyCode == 9) { // tab
             e.preventDefault();
-            // Implement tab suggest.
         } else if (e.keyCode == 13) { // enter
             // Save shell history.
             if (this.value) {
@@ -77,102 +72,30 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
 
             // Duplicate current input and append to output section.
             var line = this.parentNode.parentNode.cloneNode(true);
-            line.removeAttribute('id')
-            line.classList.add('line');
-            var input = line.querySelector('input.cmdline');
+            line.removeAttribute("id")
+            line.classList.add("line");
+            var input = line.querySelector("input.cmdline");
             input.autofocus = false;
             input.readOnly = true;
             output_.appendChild(line);
 
-            
-            if (this.value && this.value.trim()) {
-                var args = this.value.split(' ').filter(function (val, i) {
-                    return val;
-                });
-                var cmd = args[0].toLowerCase();
-                args = args.splice(1); // Remove cmd from arg list.
+            if (this.value == "h") {
+                spitline("working h");
             }
-            // console.log(this.value)
-            $.post("/command", {line: this.value}, (line) => {
+            // Send the line to the backend
+            $.post("/command", {
+                line: this.value
+            }, (line) => {
                 console.log(`"${line}" submitted from the front end`)
             });
-            //   switch (cmd) {
-            //     case 'cat':
-            //       var url = args.join(' ');
-            //       if (!url) {
-            //         output('Usage: ' + cmd + ' https://s.codepen.io/...');
-            //         output('Example: ' + cmd + ' https://s.codepen.io/AndrewBarfield/pen/LEbPJx.js');
-            //         break;
-            //       }
-            //       $.get( url, function(data) {
-            //         var encodedStr = data.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
-            //            return '&#'+i.charCodeAt(0)+';';
-            //         });
-            //         output('<pre>' + encodedStr + '</pre>');
-            //       });          
-            //       break;
-            //     case 'clear':
-            //       output_.innerHTML = '';
-            //       this.value = '';
-            //       return;
-            //     case 'clock':
-            //       var appendDiv = jQuery($('.clock-container')[0].outerHTML);
-            //       appendDiv.attr('style', 'display:inline-block');
-            //       output_.appendChild(appendDiv[0]);
-            //       break;
-            //     case 'date':
-            //       output( new Date() );
-            //       break;
-            //     case 'echo':
-            //       output( args.join(' ') );
-            //       break;
-            //     case 'help':
-            //       output('<div class="ls-files">' + CMDS_.join('<br>') + '</div>');
-            //       break;
-            //     case 'uname':
-            //       output(navigator.appVersion);
-            //       break;
-            //     case 'whoami':
-            //       var result = "<img src=\"" + codehelper_ip["Flag"]+ "\"><br><br>";
-            //       for (var prop in codehelper_ip)
-            //         result += prop + ": " + codehelper_ip[prop] + "<br>";
-            //       output(result);
-            //       break;
-            //     default:
-            //       if (cmd) {
-            //         output(cmd + ': command not found');
-            //       }
-            //   };
 
+            // Clear/setup line for next input.
             window.scrollTo(0, getDocHeight_());
-            this.value = ''; // Clear/setup line for next input.
+            this.value = "";
         }
     }
 
-    //
-    function formatColumns_(entries) {
-        var maxName = entries[0].name;
-        util.toArray(entries).forEach(function (entry, i) {
-            if (entry.name.length > maxName.length) {
-                maxName = entry.name;
-            }
-        });
-
-        var height = entries.length <= 3 ?
-            'height: ' + (entries.length * 15) + 'px;' : '';
-
-        // 12px monospace font yields ~7px screen width.
-        var colWidth = maxName.length * 7;
-
-        return ['<div class="ls-files" style="-webkit-column-width:',
-            colWidth, 'px;', height, '">'
-        ];
-    }
-
-    //
-    
-
-    // Cross-browser impl to get document's height.
+    // Cross-browser impl to get document"s height.
     function getDocHeight_() {
         var d = document;
         return Math.max(
@@ -182,42 +105,27 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
         );
     }
 
-    //
     return {
         init: function () {
-            output('');
+            output("");
         },
         output: output
     }
 };
-
-
-function output(html) {
-    var out = term.Getoutput();
-    out.insertAdjacentHTML('beforeEnd', '<p>' + html + '</p>');
+function spitline(line) {
+    var output_ = document.querySelector(outputContainer);
+    var p = document.createElement("p");
+    p.innerHTML = line
+    p.appendChild(document.createElement("br"))
+    output_.insertAdjacentHTML("beforeEnd", p.innerHTML);
+    console.log(output_)
+    // output_.appendChild(line);
 }
 
-// $(function () {
+// Set the command-line prompt to include the user"s IP Address
+$(".prompt").html("[root@PiOne] # ");
 
-    // Set the command-line prompt to include the user's IP Address
-    //$('.prompt').html('[' + codehelper_ip["IP"] + '@HTML5] # ');
-    $('.prompt').html('[root@PiOne] # ');
-
-    // Initialize a new terminal object
-    var term = new Terminal('#input-line .cmdline', '#container output');
-    term.init();
-
-    // Update the clock every second
-    // setInterval(function () {
-    //     function r(cls, deg) {
-    //         $('.' + cls).attr('transform', 'rotate(' + deg + ' 50 50)')
-    //     }
-    //     var d = new Date()
-    //     r("sec", 6 * d.getSeconds())
-    //     r("min", 6 * d.getMinutes())
-    //     r("hour", 30 * (d.getHours() % 12) + d.getMinutes() / 2)
-    // }, 1000);
-
-    
-// });
-// term.output("asdasd")
+// Initialize a new terminal object
+var outputContainer = "#container output";
+var term = new Terminal("#input-line .cmdline", outputContainer);
+term.init();
