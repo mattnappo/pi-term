@@ -85,8 +85,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
             input.readOnly = true;
             output_.appendChild(line);
 
-            console.log(this.value)
-
+            
             if (this.value && this.value.trim()) {
                 var args = this.value.split(' ').filter(function (val, i) {
                     return val;
@@ -94,7 +93,10 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
                 var cmd = args[0].toLowerCase();
                 args = args.splice(1); // Remove cmd from arg list.
             }
-
+            // console.log(this.value)
+            $.post("/command", {line: this.value}, (line) => {
+                console.log(`"${line}" submitted from the front end`)
+            });
             //   switch (cmd) {
             //     case 'cat':
             //       var url = args.join(' ');

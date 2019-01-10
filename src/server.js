@@ -1,5 +1,6 @@
-const express = require("express");
-const path    = require("path");
+const express    = require("express");
+const path       = require("path");
+const bodyParser = require("body-parser");
 
 // Setup the app
 var app = express();
@@ -13,6 +14,9 @@ const options = {
     }
 };
 app.use(express.static(__static, options));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 /*    BEGIN ROUTES    */
 
@@ -22,6 +26,12 @@ app.get("/", (req, res) => {
 
 app.get("/test", (req, res) => {
     res.send("Test succeeded - app is working properly");
+});
+
+app.post("/command", (req, res, next) => {
+    const line = req.body.line
+    console.log(line)
+    // turnoff();
 });
 
 /*    END ROUTES    */
