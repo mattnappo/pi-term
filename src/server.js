@@ -30,13 +30,12 @@ app.get("/test", (req, res) => {
 
 app.post("/command", (req, res, next) => {
     const line = req.body.line
-    console.log(line)
-    // turnoff();
+    console.log("server recieved: '" + line + "'")
 });
 
 /*    END ROUTES    */
 
 // Run the server
 app.listen(port, () => {
-    console.log(`server initiated on port ${port}`);
+    console.log(`server initiated on port ${port}\n`);
 });

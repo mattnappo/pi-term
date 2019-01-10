@@ -6,13 +6,9 @@ util.toArray = function (list) {
 var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
     window.URL = window.URL || window.webkitURL;
     window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-
-    var cmdLine_ = document.querySelector(cmdLineContainer);
+    
     var output_ = document.querySelector(outputContainer);
-
-    const CMDS_ = [
-        'cat', 'clear', 'clock', 'date', 'echo', 'help', 'uname', 'whoami'
-    ];
+    var cmdLine_ = document.querySelector(cmdLineContainer);
 
     var fs_ = null;
     var cwd_ = null;
@@ -63,6 +59,9 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
         }
     }
 
+    function Getoutput() {
+        return output_
+    }
     //
     function processNewCommand_(e) {
 
@@ -171,9 +170,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
     }
 
     //
-    function output(html) {
-        output_.insertAdjacentHTML('beforeEnd', '<p>' + html + '</p>');
-    }
+    
 
     // Cross-browser impl to get document's height.
     function getDocHeight_() {
@@ -194,7 +191,13 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
     }
 };
 
-$(function () {
+
+function output(html) {
+    var out = term.Getoutput();
+    out.insertAdjacentHTML('beforeEnd', '<p>' + html + '</p>');
+}
+
+// $(function () {
 
     // Set the command-line prompt to include the user's IP Address
     //$('.prompt').html('[' + codehelper_ip["IP"] + '@HTML5] # ');
@@ -205,14 +208,16 @@ $(function () {
     term.init();
 
     // Update the clock every second
-    setInterval(function () {
-        function r(cls, deg) {
-            $('.' + cls).attr('transform', 'rotate(' + deg + ' 50 50)')
-        }
-        var d = new Date()
-        r("sec", 6 * d.getSeconds())
-        r("min", 6 * d.getMinutes())
-        r("hour", 30 * (d.getHours() % 12) + d.getMinutes() / 2)
-    }, 1000);
+    // setInterval(function () {
+    //     function r(cls, deg) {
+    //         $('.' + cls).attr('transform', 'rotate(' + deg + ' 50 50)')
+    //     }
+    //     var d = new Date()
+    //     r("sec", 6 * d.getSeconds())
+    //     r("min", 6 * d.getMinutes())
+    //     r("hour", 30 * (d.getHours() % 12) + d.getMinutes() / 2)
+    // }, 1000);
 
-});
+    
+// });
+// term.output("asdasd")
