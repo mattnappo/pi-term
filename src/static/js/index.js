@@ -80,7 +80,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
             output_.appendChild(line);
 
             if (this.value == "h") {
-                spitline("working h");
+                putline("working h");
             }
             // Send the line to the backend
             $.post("/command", {
@@ -112,7 +112,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
         output: output
     }
 };
-function spitline(line) {
+function putline(line) {
     var output_ = document.querySelector(outputContainer);
     var p = document.createElement("p");
     p.innerHTML = line
