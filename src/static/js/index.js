@@ -112,6 +112,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
         output: output
     }
 };
+
 function putline(line) {
     var output_ = document.querySelector(outputContainer);
     var p = document.createElement("p");

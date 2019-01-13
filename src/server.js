@@ -1,6 +1,7 @@
 const express    = require("express");
 const path       = require("path");
 const bodyParser = require("body-parser");
+const net        = require("./net");
 
 // Setup the app
 var app = express();
@@ -29,8 +30,9 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/command", (req, res, next) => {
-    const line = req.body.line
-    console.log("server recieved: '" + line + "'")
+    const line = req.body.line;
+    console.log("server recieved: '" + line + "'");
+    net.sendCommand(line);
 });
 
 /*    END ROUTES    */
