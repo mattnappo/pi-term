@@ -1,9 +1,12 @@
 const express    = require("express");
 const path       = require("path");
 const bodyParser = require("body-parser");
+const SSH        = require("simple-ssh");
+const conndata   = require("./data/conndata.json");
 const net        = require("./net");
 
-// Setup the app
+/*    BEGIN SETUP    */
+
 var app = express();
 const port = 3030;
 const __static = "src/static"
@@ -19,6 +22,31 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+/*    END SETUP    */
+
+
+/*    START SSH    */
+
+var connections = { };
+// console.log(conndata);
+for (var conn in conndata) {
+    // console.log();
+    if (conndata.hasOwnProperty(conn)) {
+        var ssh = new SSH({
+            host: conndata[conn].host,
+            user: conndata[conn].user,
+            pass: conndata[conn].pass
+        });
+        connections[conndata[conn].host] = ssh;
+    }
+}
+
+console.log(connections);
+
+
+/*    END SSH    */
+
+
 /*    BEGIN ROUTES    */
 
 app.get("/", (req, res) => {
@@ -31,13 +59,18 @@ app.get("/test", (req, res) => {
 
 app.post("/command", (req, res, next) => {
     const line = req.body.line;
+    const address = req.body.address;
     console.log("server recieved: '" + line + "'");
-    net.sendCommand(line);
+    net.sendCommand(line, connections[address]);
 });
 
 /*    END ROUTES    */
 
-// Run the server
+
+/*    START SERVER    */
+
 app.listen(port, () => {
     console.log(`server initiated on port ${port}\n`);
 });
+
+/*    END SERVER    */
