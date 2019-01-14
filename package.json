@@ -4,7 +4,7 @@
   "description": "An HTML and CSS wrapper to send commands to my Raspberry Pis",
   "main": "index.js",
   "scripts": {
-    "server": "node src/server.js"
+    "server": "node src/server/server.js"
   },
   "repository": {
     "type": "git",

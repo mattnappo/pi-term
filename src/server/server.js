@@ -2,8 +2,9 @@ const express    = require("express");
 const path       = require("path");
 const bodyParser = require("body-parser");
 const SSH        = require("simple-ssh");
-const conndata   = require("./data/conndata.json");
 const net        = require("./net");
+const common     = require("./common");
+const conndata   = require("./data/conndata.json");
 
 /*    BEGIN SETUP    */
 
@@ -35,13 +36,12 @@ for (var conn in conndata) {
         var ssh = new SSH({
             host: conndata[conn].host,
             user: conndata[conn].user,
-            pass: conndata[conn].pass
+            pass: common.LoadPassword(conndata[conn].pass)
         });
         connections[conndata[conn].host] = ssh;
     }
 }
-
-console.log(connections);
+ 
 
 
 /*    END SSH    */
