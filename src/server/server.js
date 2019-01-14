@@ -51,7 +51,7 @@ for (var conn in conndata) {
 /*    BEGIN ROUTES    */
 
 app.get("/", (req, res) => {
-    res.set("Content-Type", "text/html");
+    // res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "index.html"));
 });
 
@@ -59,7 +59,7 @@ app.get("/test", (req, res) => {
     res.send("Test succeeded - app is working properly");
 });
 
-app.post("/command", (req, res, next) => {
+app.post("/command", async (req, res, next) => {
     const line = req.body.line;
     const address = req.body.address;
     
@@ -68,13 +68,14 @@ app.post("/command", (req, res, next) => {
     var id = parseInt(address[address.length - 1]);
     connections[id].exec(line, {
         out: (stdout) => {
-            res.set("Content-Type", "text/json");
+            // res.set("Content-Type", "text/json");
             res.json({
                 output: stdout
             });
             // res.status(500).json({ error: "an error occurred" });
         }
     }).start();
+    
 
     // res.set("Content-Type", "text/json");
     // res.json({
