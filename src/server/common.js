@@ -3,7 +3,7 @@ const fs      = require("fs");
 
 function GenerateNewKey() {
     var newKey = new NodeRSA({b: 2048});
-    fs.writeFile("key.pem", newKey.exportKey("pkcs8") , "utf-8", function(err) {
+    fs.writeFile("key.pem", newKey.exportKey("pkcs8") , "utf-8", (err) => {
         if (err) {
             return console.log(err);
         }

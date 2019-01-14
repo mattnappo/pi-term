@@ -1,7 +1,8 @@
 function SendCommand(line, conn) {
     conn.exec(line, {
-        out: function(stdout) {
-            return stdout;
+        out: (stdout) => {
+            // return stdout;
+            console.log(stdout);
         }
     }).start();
 }
