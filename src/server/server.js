@@ -70,6 +70,7 @@ app.post("/command", (req, res, next) => {
             res.json({
                 output: stdout
             });
+            res.status(500).json({ error: "an error occurred" });
         }
     }).start();
     // var output = net.SendCommand(line, connections[id]);

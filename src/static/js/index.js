@@ -86,8 +86,10 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
             $.post("/command", {
                 line: this.value,
                 address: "192.168.1.101"
-            }, (line, address) => {
-                // console.log(`"${line}" submitted from the front end to address "${address}"`)
+            }, (res) => {
+                // var raw = String.raw(res.output);
+                putline(res.output);
+                // console.log(raw);
             });
 
             // Clear/setup line for next input.
@@ -132,12 +134,12 @@ var outputContainer = "#container output";
 var term = new Terminal("#input-line .cmdline", outputContainer);
 term.init();
 
-fetch("http://localhost:3030/command")
-  .then(res => res.json())
-  .then(res => {
-      console.log(res.output);
-    // do something with res, being a JSON object
-    // const content = document.queryElement('#content');
-    // content.innerHTML = `new content being ${res.output}`;
-    // putline(res.output);
-});
+// fetch("http://localhost:3030/command")
+//   .then(res => res.json())
+//   .then(res => {
+//       console.log(res.output);
+//     // do something with res, being a JSON object
+//     // const content = document.queryElement('#content');
+//     // content.innerHTML = `new content being ${res.output}`;
+//     // putline(res.output);
+// });
