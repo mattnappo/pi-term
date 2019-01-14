@@ -84,7 +84,8 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
             }
             // Send the line to the backend
             $.post("/command", {
-                line: this.value
+                line: this.value,
+                address: "192.168.1.101"
             }, (line) => {
                 console.log(`"${line}" submitted from the front end`)
             });

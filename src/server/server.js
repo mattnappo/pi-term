@@ -41,7 +41,7 @@ for (var conn in conndata) {
         connections[conndata[conn].host] = ssh;
     }
 }
- 
+
 
 
 /*    END SSH    */
@@ -60,8 +60,9 @@ app.get("/test", (req, res) => {
 app.post("/command", (req, res, next) => {
     const line = req.body.line;
     const address = req.body.address;
-    console.log("server recieved: '" + line + "'");
-    net.sendCommand(line, connections[address]);
+    console.log(`server received command '${line}' for address '${address}'`);
+    var output = net.SendCommand(line, connections[address]);
+    console.log(`output: ${output}`);
 });
 
 /*    END ROUTES    */
