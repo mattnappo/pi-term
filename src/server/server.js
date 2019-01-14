@@ -51,6 +51,7 @@ for (var conn in conndata) {
 /*    BEGIN ROUTES    */
 
 app.get("/", (req, res) => {
+    res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "index.html"));
 });
 
@@ -62,17 +63,24 @@ app.post("/command", (req, res, next) => {
     const line = req.body.line;
     const address = req.body.address;
     
-    console.log(`server received command '${line}' for address '${address}'`);
+    console.log(`server received command "${line}" for address "${address}"`);
 
     var id = parseInt(address[address.length - 1]);
     connections[id].exec(line, {
         out: (stdout) => {
+            res.set("Content-Type", "text/json");
             res.json({
                 output: stdout
             });
-            res.status(500).json({ error: "an error occurred" });
+            // res.status(500).json({ error: "an error occurred" });
         }
     }).start();
+
+    // res.set("Content-Type", "text/json");
+    // res.json({
+    //     output: "stdout"
+    // });
+
     // var output = net.SendCommand(line, connections[id]);
     // console.log(`output: ${output}`);
 
