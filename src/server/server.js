@@ -1,10 +1,10 @@
-const express    = require("express");
-const path       = require("path");
+const express = require("express");
+const path = require("path");
 const bodyParser = require("body-parser");
-const SSH        = require("simple-ssh");
-const net        = require("./net");
-const common     = require("./common");
-const conndata   = require("./data/conndata.json");
+const SSH = require("simple-ssh");
+const net = require("./net");
+const common = require("./common");
+const conndata = require("./data/conndata.json");
 
 /*    BEGIN SETUP    */
 
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 
 /*    START SSH    */
 
-var connections = [ ];
+var connections = [];
 for (var conn in conndata) {
     if (conndata.hasOwnProperty(conn)) {
         var ssh = new SSH({
@@ -62,8 +62,32 @@ app.get("/test", (req, res) => {
 app.post("/command", async (req, res, next) => {
     const line = req.body.line;
     const address = req.body.address;
-    
+
     console.log(`server received command "${line}" for address "${address}"`);
+
+
+
+    let dataReceivedSuccessfully = false;
+
+    let promise1 = new Promise((resolve, reject) => {
+        if (dataReceivedSuccessfully) {
+            resolve('Data Available!');
+        }
+        if (!dataReceivedSuccessfully) {
+            reject('Data Corrupted!');
+        }
+    });
+
+    promise1.then((message) => {
+        console.log(`message: ${message}`);
+        
+
+    }).catch((message) => {
+        console.log(`an error happened. message: ${message}`);
+    });
+
+
+
 
     var id = parseInt(address[address.length - 1]);
     connections[id].exec(line, {
@@ -75,7 +99,7 @@ app.post("/command", async (req, res, next) => {
             // res.status(500).json({ error: "an error occurred" });
         }
     }).start();
-    
+
 
     // res.set("Content-Type", "text/json");
     // res.json({
