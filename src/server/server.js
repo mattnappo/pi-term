@@ -59,46 +59,60 @@ app.get("/test", (req, res) => {
     res.send("Test succeeded - app is working properly");
 });
 
+
+
+
+
+
+
+async function SendLineInternal(id, line) {
+    let res = new Promise(function(resolve, reject) {
+        
+        connections[id].exec(line, {
+            out: (stdout) => {
+                // res.set("Content-Type", "text/json");
+                // res.json({
+                //     output: stdout
+                // });
+                // resolve("good!");
+                resolve(stdout);
+                // res.status(500).json({ error: "an error occurred" });
+            }
+        }).start();
+
+
+        // may be a heavy db call or http request?
+         // successfully fill promise
+    });
+
+    res.then( (message) => {
+        console.log(message);
+        return message;
+    }).catch( (message) => {
+        console.log(message);
+        return message;
+    });
+}
+
+async function SendCommand(id, line) {
+    var res = await SendLineInternal(id, line);
+    return res.message;
+    
+}
+
 app.post("/command", async (req, res, next) => {
     const line = req.body.line;
     const address = req.body.address;
 
     console.log(`server received command "${line}" for address "${address}"`);
 
-
-
-    let dataReceivedSuccessfully = false;
-
-    let promise1 = new Promise((resolve, reject) => {
-        if (dataReceivedSuccessfully) {
-            resolve('Data Available!');
-        }
-        if (!dataReceivedSuccessfully) {
-            reject('Data Corrupted!');
-        }
-    });
-
-    promise1.then((message) => {
-        console.log(`message: ${message}`);
-        
-
-    }).catch((message) => {
-        console.log(`an error happened. message: ${message}`);
-    });
-
-
-
+    
 
     var id = parseInt(address[address.length - 1]);
-    connections[id].exec(line, {
-        out: (stdout) => {
-            // res.set("Content-Type", "text/json");
-            res.json({
-                output: stdout
-            });
-            // res.status(500).json({ error: "an error occurred" });
-        }
-    }).start();
+    var response = SendCommand(id, line);
+    console.log(`response: ${response}`);
+
+    
 
 
     // res.set("Content-Type", "text/json");
