@@ -2,9 +2,7 @@ const express    = require("express");
 const path       = require("path");
 const bodyParser = require("body-parser");
 const SSH        = require("simple-ssh");
-const fs         = require("fs");
 
-const net        = require("./net");
 const common     = require("./common");
 const conndata   = require("./data/conndata.json");
 
@@ -50,10 +48,31 @@ for (var conn in conndata) {
 /*    END SSH    */
 
 
+/*    BEGIN NET    */
+
+// SendCommand - Send a command to a raspi
+function SendCommand(command, id) {
+    return new Promise(function (resolve, reject) {
+        connections[id].exec(command, {
+            out: (stdout) => {
+                if (stdout != "") {
+                    resolve(stdout);
+                }
+                else {
+                    reject("error retrieving stdout for command '" + line + "'");
+                }
+            }
+        }).start()
+    });
+}
+
+/*    END NET    */
+
+
 /*    BEGIN ROUTES    */
 
 app.get("/", (req, res) => {
-    // res.set("Content-Type", "text/html");
+    res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "index.html"));
 });
 
@@ -61,80 +80,23 @@ app.get("/test", (req, res) => {
     res.send("Test succeeded - app is working properly");
 });
 
-
-
-function getData(command, id) {
-    return new Promise(function (resolve, reject) {
-        connections[id].exec(command, {
-            out: (stdout) => {
-                if (stdout != "") {
-                    resolve(stdout);
-                }
-                // else {
-                //     reject("error retrieving stdout for command '" + line + "'");
-                // }
-            }
-        }).start()
-        // fs.readFile(fileName, type, (err, data) => {
-        //     err ? reject(err) : ;
-        // });
-    });
-}
-
-
-// SendCommand - Send a command to a raspi
-const SendCommand = (command, ipID) =>
-    new Promise((resolve, reject) =>
-        connections[ipID].exec(command, {
-            out: (stdout) => {
-                if (stdout != "") {
-                    resolve(stdout);
-                } else {
-                    reject("error retrieving stdout for command '" + line + "'");
-                }
-            }
-        }).start()
-    );
-
 app.post("/command", async (req, res, next) => {
-    // Get the command from user input on frontend
+    // Get the command and IP from user input on frontend
     const line = req.body.line;
     const address = req.body.address;
+    var id = parseInt(address[address.length - 1]);    
     console.log(`server received command "${line}" for address "${address}"`);
 
-    // Send the command to the raspi and get the raspi's output
-    var id = parseInt(address[address.length - 1]);
-    // var response = SendCommand(id, line);
-
-    // SendCommand(command, id)
-    //     .then(data => console.log("Data: ", data))
-    //     .catch(error => console.log("Error: ", error));
-
-    
-    getData("ls -la", id)
-    .then(data => {
-        console.log('Data: ', data);
+    SendCommand(line, id)
+    .then(stdout => {
         res.set("Content-Type", "text/json");
         res.json({
-            output: data
+            output: stdout
         });
     })
     .catch(error => {
         console.log(`error - ${error}`);
     });
-
-
-    // response.then( (message) => {
-    //     console.log(`message: ${message}`)
-
-    // });
-    // console.log(`response: ${response}`);
-
-    
-
-    // var output = net.SendCommand(line, connections[id]);
-    // console.log(`output: ${output}`);
-
 
 });
 
