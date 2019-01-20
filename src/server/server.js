@@ -2,7 +2,7 @@ const express    = require("express");
 const path       = require("path");
 const bodyParser = require("body-parser");
 const SSH        = require("simple-ssh");
-const net        = require("./net");
+
 const common     = require("./common");
 const conndata   = require("./data/conndata.json");
 
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 
 /*    START SSH    */
 
-var connections = [ ];
+var connections = [];
 for (var conn in conndata) {
     if (conndata.hasOwnProperty(conn)) {
         var ssh = new SSH({
@@ -48,10 +48,31 @@ for (var conn in conndata) {
 /*    END SSH    */
 
 
+/*    BEGIN NET    */
+
+// SendCommand - Send a command to a raspi
+function SendCommand(command, id) {
+    return new Promise(function (resolve, reject) {
+        connections[id].exec(command, {
+            out: (stdout) => {
+                if (stdout != "") {
+                    resolve(stdout);
+                }
+                else {
+                    reject("error retrieving stdout for command '" + line + "'");
+                }
+            }
+        }).start()
+    });
+}
+
+/*    END NET    */
+
+
 /*    BEGIN ROUTES    */
 
 app.get("/", (req, res) => {
-    // res.set("Content-Type", "text/html");
+    res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "index.html"));
 });
 
@@ -60,31 +81,22 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/command", async (req, res, next) => {
+    // Get the command and IP from user input on frontend
     const line = req.body.line;
     const address = req.body.address;
-    
+    var id = parseInt(address[address.length - 1]);    
     console.log(`server received command "${line}" for address "${address}"`);
 
-    var id = parseInt(address[address.length - 1]);
-    connections[id].exec(line, {
-        out: (stdout) => {
-            // res.set("Content-Type", "text/json");
-            res.json({
-                output: stdout
-            });
-            // res.status(500).json({ error: "an error occurred" });
-        }
-    }).start();
-    
-
-    // res.set("Content-Type", "text/json");
-    // res.json({
-    //     output: "stdout"
-    // });
-
-    // var output = net.SendCommand(line, connections[id]);
-    // console.log(`output: ${output}`);
-
+    SendCommand(line, id)
+    .then(stdout => {
+        res.set("Content-Type", "text/json");
+        res.json({
+            output: stdout
+        });
+    })
+    .catch(error => {
+        console.log(`error - ${error}`);
+    });
 
 });
 
