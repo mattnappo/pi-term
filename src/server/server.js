@@ -1,10 +1,12 @@
-const express = require("express");
-const path = require("path");
+const express    = require("express");
+const path       = require("path");
 const bodyParser = require("body-parser");
-const SSH = require("simple-ssh");
-const net = require("./net");
-const common = require("./common");
-const conndata = require("./data/conndata.json");
+const SSH        = require("simple-ssh");
+const fs         = require("fs");
+
+const net        = require("./net");
+const common     = require("./common");
+const conndata   = require("./data/conndata.json");
 
 /*    BEGIN SETUP    */
 
@@ -59,47 +61,40 @@ app.get("/test", (req, res) => {
     res.send("Test succeeded - app is working properly");
 });
 
-async function SendLineInternal(id, line) {
-    let res = new Promise(function(resolve, reject) {
-        
-        connections[id].exec(line, {
+
+
+function getData(command, id) {
+    return new Promise(function (resolve, reject) {
+        connections[id].exec(command, {
             out: (stdout) => {
-                // res.set("Content-Type", "text/json");
-                // res.json({
-                //     output: stdout
-                // });
-                // resolve("good!");
+                if (stdout != "") {
+                    resolve(stdout);
+                }
+                // else {
+                //     reject("error retrieving stdout for command '" + line + "'");
+                // }
+            }
+        }).start()
+        // fs.readFile(fileName, type, (err, data) => {
+        //     err ? reject(err) : ;
+        // });
+    });
+}
+
+
+// SendCommand - Send a command to a raspi
+const SendCommand = (command, ipID) =>
+    new Promise((resolve, reject) =>
+        connections[ipID].exec(command, {
+            out: (stdout) => {
                 if (stdout != "") {
                     resolve(stdout);
                 } else {
                     reject("error retrieving stdout for command '" + line + "'");
                 }
-                // res.status(500).json({ error: "an error occurred" });
             }
-        }).start();
-
-
-        // may be a heavy db call or http request?
-         // successfully fill promise
-    });
-
-    res.then( (message) => {
-        // console.log(`message: ${message}`);
-        return message;
-    }).catch( (message) => {
-        return message;
-    });
-
-    // return res.resolve("hi");
-}
-
-async function SendCommand(id, line) {
-    let lineRes = await SendLineInternal(id, line);
-    lineRes.then( (result) => {
-        console.log(result);
-    });
-    // return lineRes;
-}
+        }).start()
+    );
 
 app.post("/command", async (req, res, next) => {
     // Get the command from user input on frontend
@@ -109,18 +104,33 @@ app.post("/command", async (req, res, next) => {
 
     // Send the command to the raspi and get the raspi's output
     var id = parseInt(address[address.length - 1]);
-    var response = SendCommand(id, line);
+    // var response = SendCommand(id, line);
+
+    // SendCommand(command, id)
+    //     .then(data => console.log("Data: ", data))
+    //     .catch(error => console.log("Error: ", error));
+
     
+    getData("ls -la", id)
+    .then(data => {
+        console.log('Data: ', data);
+        res.set("Content-Type", "text/json");
+        res.json({
+            output: "stdout"
+        });
+    })
+    .catch(error => {
+        console.log(`error - ${error}`);
+    });
+
+
     // response.then( (message) => {
     //     console.log(`message: ${message}`)
-        
+
     // });
     // console.log(`response: ${response}`);
 
-    // res.set("Content-Type", "text/json");
-    // res.json({
-    //     output: "stdout"
-    // });
+    
 
     // var output = net.SendCommand(line, connections[id]);
     // console.log(`output: ${output}`);
