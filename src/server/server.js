@@ -59,12 +59,6 @@ app.get("/test", (req, res) => {
     res.send("Test succeeded - app is working properly");
 });
 
-
-
-
-
-
-
 async function SendLineInternal(id, line) {
     let res = new Promise(function(resolve, reject) {
         
@@ -90,17 +84,21 @@ async function SendLineInternal(id, line) {
     });
 
     res.then( (message) => {
-        // console.log(message);
+        // console.log(`message: ${message}`);
         return message;
     }).catch( (message) => {
-        // console.log(message);
         return message;
     });
+
+    // return res.resolve("hi");
 }
 
 async function SendCommand(id, line) {
-    var lineRes = await SendLineInternal(id, line);
-    return lineRes;
+    let lineRes = await SendLineInternal(id, line);
+    lineRes.then( (result) => {
+        console.log(result);
+    });
+    // return lineRes;
 }
 
 app.post("/command", async (req, res, next) => {
@@ -112,13 +110,11 @@ app.post("/command", async (req, res, next) => {
     // Send the command to the raspi and get the raspi's output
     var id = parseInt(address[address.length - 1]);
     var response = SendCommand(id, line);
-    response.then( (message) => {
-        console.log(`message: ${message}`)
-        res.set("Content-Type", "text/json");
-        res.json({
-            output: "stdout"
-        });
-    });
+    
+    // response.then( (message) => {
+    //     console.log(`message: ${message}`)
+        
+    // });
     // console.log(`response: ${response}`);
 
     // res.set("Content-Type", "text/json");
