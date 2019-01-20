@@ -116,7 +116,7 @@ app.post("/command", async (req, res, next) => {
         console.log('Data: ', data);
         res.set("Content-Type", "text/json");
         res.json({
-            output: "stdout"
+            output: data
         });
     })
     .catch(error => {
