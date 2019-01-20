@@ -75,7 +75,11 @@ async function SendLineInternal(id, line) {
                 //     output: stdout
                 // });
                 // resolve("good!");
-                resolve(stdout);
+                if (stdout != "") {
+                    resolve(stdout);
+                } else {
+                    reject("error retrieving stdout for command '" + line + "'");
+                }
                 // res.status(500).json({ error: "an error occurred" });
             }
         }).start();
@@ -86,34 +90,36 @@ async function SendLineInternal(id, line) {
     });
 
     res.then( (message) => {
-        console.log(message);
+        // console.log(message);
         return message;
     }).catch( (message) => {
-        console.log(message);
+        // console.log(message);
         return message;
     });
 }
 
 async function SendCommand(id, line) {
-    var res = await SendLineInternal(id, line);
-    return res.message;
-    
+    var lineRes = await SendLineInternal(id, line);
+    return lineRes;
 }
 
 app.post("/command", async (req, res, next) => {
+    // Get the command from user input on frontend
     const line = req.body.line;
     const address = req.body.address;
-
     console.log(`server received command "${line}" for address "${address}"`);
 
-    
-
+    // Send the command to the raspi and get the raspi's output
     var id = parseInt(address[address.length - 1]);
     var response = SendCommand(id, line);
-    console.log(`response: ${response}`);
-
-    
-
+    response.then( (message) => {
+        console.log(`message: ${message}`)
+        res.set("Content-Type", "text/json");
+        res.json({
+            output: "stdout"
+        });
+    });
+    // console.log(`response: ${response}`);
 
     // res.set("Content-Type", "text/json");
     // res.json({
