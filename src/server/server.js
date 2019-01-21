@@ -11,7 +11,7 @@ const conndata   = require("./data/conndata.json");
 var app = express();
 const port = 3030;
 const __static = "src/static"
-let authenticated = false;
+var authenticated = false;
 const options = {
     dotfiles: "ignore",
     extensions: ["html", "css", "js"],
@@ -77,8 +77,34 @@ app.get("/", (req, res) => {
     res.sendFile(path.resolve(__static, "login.html"));
 });
 
+app.post("/login", (req, res, next) => {
+    var user = req.body.username;
+    var pass = req.body.password;
+    console.log(`username: ${user}\npassword: ${pass}`);
+    if (user = "q" && pass == "q") {
+        authenticated = true;
+        res.redirect("/terminal");
+    } else {
+
+    }
+        
+});
+
+app.get("/terminal", (req, res) => {
+    console.log(`auth: ${authenticated}`)
+    if (authenticated == true) {
+        res.set("Content-Type", "text/html");
+        res.sendFile(path.resolve(__static, "terminal.html"));
+    } else {
+        console.log("WORKING");
+        res.redirect("/");
+    }
+    res.set("Content-Type", "text/html");
+    res.sendFile(path.resolve(__static, "login.html"));
+});
+
 app.get("/test", (req, res) => {
-    res.send("Test succeeded - app is working properly");
+    res.send("Tests succeeded - app is working properly");
 });
 
 app.post("/command", async (req, res, next) => {

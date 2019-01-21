@@ -2,6 +2,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <title>Terminal Login</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css" />
@@ -40,14 +41,14 @@
         </div> -->
 
     <div class="centered login" id="container">
-        <form method="post" action="/">
-            <h1 style="margin-left: 8px;">Web Terminal</h1>
+        <form method="post" action="/login/">
+            <h1>Login</h1>
             
             <label>Username</label>
-            <input class="w3-input" type="text" />
+            <input class="w3-input" type="text" name="username" />
             
             <label>Password</label>
-            <input class="w3-input" type="password" />
+            <input class="w3-input" type="password" name="password" />
             
             <button type="submit" name="login">Login</button>
             
