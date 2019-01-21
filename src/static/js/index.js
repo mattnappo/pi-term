@@ -79,8 +79,8 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
             input.readOnly = true;
             output_.appendChild(line);
 
-            if (this.value == "h") {
-                putline("working h");
+            if (this.value == "test") {
+                putline("text added!");
             }
             // Send the line to the backend
             $.post("/command", {
