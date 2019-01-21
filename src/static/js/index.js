@@ -119,9 +119,10 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
 function putline(line) {
     var output_ = document.querySelector(outputContainer);
     var p = document.createElement("p");
-    p.innerHTML = line
-    p.appendChild(document.createElement("br"))
-    output_.insertAdjacentHTML("beforeEnd", p.innerHTML);
+    var pre = document.createElement("pre");
+    pre.innerHTML = line
+    pre.appendChild(document.createElement("br"))
+    output_.insertAdjacentHTML("beforeEnd", pre.innerHTML);
     console.log(output_)
     // output_.appendChild(line);
 }
