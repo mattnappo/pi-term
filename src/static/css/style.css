@@ -12,8 +12,9 @@ body {
 body {
     font-size: 11pt;
     font-family: Inconsolata, monospace;
-    color: white;
-    background-color: black;
+    color: #f9f9f9;
+    /* color: #feea39; */
+    background-color: #373f45;
 }
 
 #container {
@@ -54,7 +55,7 @@ body {
 
 .prompt {
     white-space: nowrap;
-    color: #96b38a;
+    color: #1f95f2;
     margin-right: 7px;
     display: -webkit-box;
     -webkit-box-pack: center;

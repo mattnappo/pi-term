@@ -89,6 +89,8 @@ app.post("/command", async (req, res, next) => {
 
     SendCommand(line, id)
     .then(stdout => {
+        // console.log(String.Raw`stdout`);
+        console.log(String.raw`/\//` .match (stdout));
         res.set("Content-Type", "text/json");
         res.json({
             output: stdout
