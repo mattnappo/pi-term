@@ -124,7 +124,7 @@ function putline(line) {
     pre.appendChild(document.createElement("br"))
     output_.insertAdjacentHTML("beforeEnd", pre.innerHTML);
     console.log(output_)
-    // output_.appendChild(line);
+    document.getElementById("container").scrollTop = document.getElementById("container").scrollHeight;
 }
 
 // Set the command-line prompt to include the user"s IP Address
