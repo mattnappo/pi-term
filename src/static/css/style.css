@@ -13,7 +13,7 @@ body {
     font-size: 11pt;
     font-family: Inconsolata, monospace;
     color: #f9f9f9;
-    /* color: #feea39; */
+    /* background-color: white; */
     background-color: #373f45;
 }
 
@@ -87,4 +87,23 @@ body {
     -moz-column-width: 100px;
     -o-column-width: 100px;
     column-width: 100px;
+}
+
+.centered {
+    border: 1px solid #1f95f2;
+    background-color: #373f45;
+    border-radius: 10px;
+    width: 800px;
+    height: 450px;
+    /* background-color: /; */
+
+    position: absolute; /*it can be fixed too*/
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    margin: auto;
+
+    /*this to solve "the content will not be cut when the window is smaller than the content": */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
 }

@@ -134,13 +134,3 @@ $(".prompt").html("[root@PiOne] # ");
 var outputContainer = "#container output";
 var term = new Terminal("#input-line .cmdline", outputContainer);
 term.init();
-
-// fetch("http://localhost:3030/command")
-//   .then(res => res.json())
-//   .then(res => {
-//       console.log(res.output);
-//     // do something with res, being a JSON object
-//     // const content = document.queryElement('#content');
-//     // content.innerHTML = `new content being ${res.output}`;
-//     // putline(res.output);
-// });
