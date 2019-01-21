@@ -59,7 +59,7 @@ body {
     white-space: nowrap;
     color: #1f95f2;
     /* color: #6edfff; */
-    margin-right: 7px;
+    /* margin-right: 7px; */
     display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-orient: vertical;
@@ -131,14 +131,14 @@ input {
     background-color: #0f111b;
     outline: none;
     color: #6edfff;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     border-color: #6edfff;
 }
 
 h1 {
     color: #1f95f2;
     font-family: 'Roboto Slab', serif;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 
@@ -147,7 +147,7 @@ form {
 }
 
 button {
-    margin-top: 12px;
+    margin-top: 20px;
     padding: 8px 32px;
     vertical-align: middle;
     overflow: hidden;
