@@ -11,6 +11,7 @@ const conndata   = require("./data/conndata.json");
 var app = express();
 const port = 3030;
 const __static = "src/static"
+let authenticated = false;
 const options = {
     dotfiles: "ignore",
     extensions: ["html", "css", "js"],
@@ -73,7 +74,7 @@ function SendCommand(command, id) {
 
 app.get("/", (req, res) => {
     res.set("Content-Type", "text/html");
-    res.sendFile(path.resolve(__static, "index.html"));
+    res.sendFile(path.resolve(__static, "login.html"));
 });
 
 app.get("/test", (req, res) => {
