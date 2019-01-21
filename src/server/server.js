@@ -81,11 +81,12 @@ app.post("/login", (req, res, next) => {
     var user = req.body.username;
     var pass = req.body.password;
     console.log(`username: ${user}\npassword: ${pass}`);
-    if (user = "q" && pass == "q") {
+    if (user = "admin" && pass == "admin") {
         authenticated = true;
         res.redirect("/terminal");
     } else {
-
+        authenticated = false;
+        res.redirect("/");
     }
         
 });

@@ -58,6 +58,7 @@ body {
 .prompt {
     white-space: nowrap;
     color: #1f95f2;
+    margin-right: 7px;
     /* color: #6edfff; */
     /* margin-right: 7px; */
     display: -webkit-box;
