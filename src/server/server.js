@@ -108,7 +108,7 @@ app.get("/test", (req, res) => {
     res.send("Tests succeeded - app is working properly");
 });
 
-app.post("/command", async (req, res, next) => {
+app.post("/command", (req, res, next) => {
     // Get the command and IP from user input on frontend
     const line = req.body.line;
     const address = req.body.address;
