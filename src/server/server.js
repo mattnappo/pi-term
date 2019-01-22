@@ -9,7 +9,7 @@ const conndata   = require("./data/conndata.json");
 /*    BEGIN SETUP    */
 
 var app = express();
-const port = 3030;
+const port = 3000;
 const __static = "src/static"
 var authenticated = false;
 const options = {
