@@ -1,0 +1,31 @@
+html, body, *, h1, h2, h3, h4 {
+    font-family: SFCompactDisplay;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.li {
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.li:hover {
+    background-color: #1f95f2;
+}
+
+.w3-quarter {
+    height: 100%;
+
+}
+
+.w3-threequarter {
+    height: 100%;
+    background-color: white;
+}
+
+.sidenav {
+    font-size: 16px;
+}
