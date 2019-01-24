@@ -32,3 +32,5 @@ CMD [ "npm", "run", "server" ]
 # docker ps lists all running containers
 # docker images lists all built images on your computer
 # docker container is a nice command
+# docker logs <container id> shows the container's logs
+# docker exec -it <container id> /bin/bash to enter the container
