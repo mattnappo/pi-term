@@ -1,5 +1,7 @@
+@font-face { font-family: ProximaNova; src: url("../fonts/FontsFree-Net-proxima_nova_reg-webfont.ttf"); }
+
 html, body, *, h1, h2, h3, h4 {
-    font-family: SFCompactDisplay;
+    font-family: ProximaNova;
 }
 
 ul {
@@ -13,19 +15,21 @@ ul {
 }
 
 .li:hover {
-    background-color: #1f95f2;
+    background-color: #23273a;
 }
 
-.w3-quarter {
+.w3-sidebar {
     height: 100%;
-
+    font-size: 16px;
+    background-color: #0f111b;
+    /* width: 8%; */
 }
 
-.w3-threequarter {
+.content {
     height: 100%;
     background-color: white;
 }
 
-.sidenav {
-    font-size: 16px;
+.w3-card-4 {
+    background-color: #f0f2f4;
 }
