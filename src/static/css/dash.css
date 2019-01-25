@@ -1,17 +1,20 @@
 @font-face { font-family: ProximaNova; src: url("../fonts/FontsFree-Net-proxima_nova_reg-webfont.ttf"); }
-
-html, body, *, h1, h2, h3, h4 {
-    font-family: ProximaNova;
+html, body, *, h1, h2, h3, h4 { font-family: ProximaNova; }
+body {
+    background-color: white;
 }
 
-ul {
-    list-style-type: none;
+h1, h2, h3 { color: #1f95f2; }
+ul { list-style-type: none; }
+p { color: black; }
+header {
+
 }
 
 .li {
-    padding: 8px;
+    padding: 1px;
     border-radius: 4px;
-    margin-bottom: 12px;
+    margin-bottom: 2px;
 }
 
 .li:hover {
@@ -30,6 +33,16 @@ ul {
     background-color: white;
 }
 
-.w3-card-4 {
-    background-color: #f0f2f4;
+.w3-card {
+    background-color: white;
+    
+    /* FOR SHADOWS */
+    /* border: 2px solid #f0f2f4;
+    box-shadow: none;
+    border-radius: 4px; */
+}
+
+.navheader {
+    padding: 8px 16px;
+    color: white;
 }
