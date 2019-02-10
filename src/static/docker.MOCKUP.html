@@ -60,19 +60,37 @@
             </div>
 
             <div class="w3-row">
-                <div class="w3-container w3-threequarter">
-                    <div class="w3-card">
-                        <header class="w3-container">
-                            <h3>Container</h3>
-                        </header>
+                <div class="w3-threequarter">
 
-                        <div class="w3-container">
-                            <p>Runtime</p>
-                            <p>Some more container info here</p>
-                            <p>download container log (something like that)</p>
+                    <div class="w3-container">
+                        <div class="w3-card">
+                            <header class="w3-container">
+                                <h3>Container</h3>
+                            </header>
+
+                            <div class="w3-container">
+                                <p>Runtime</p>
+                                <p>Some more container info here</p>
+                                <p>download container log (something like that)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w3-container" style="margin-top: 32px;">
+                        <div class="w3-card">
+                            <header class="w3-container">
+                                <h3>THIS DIV</h3>
+                            </header>
+
+                            <div class="w3-container">
+                                <p>Lorem ipsum...</p>
+                                <p>Lorem ipsum...</p>
+                                <p>Lorem ipsum...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="w3-container w3-quarter w3-col">
                     <div class="w3-card">
@@ -106,42 +124,31 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="w3-container w3-threequarter" style="margin-top: 32px;">
-                    <div class="w3-card">
-                        <header class="w3-container">
-                            <h3>THIS DIV</h3>
-                        </header>
 
-                        <div class="w3-container">
-                            <p>Lorem ipsum...</p>
-                            <p>Lorem ipsum...</p>
-                            <p>Lorem ipsum...</p>
-                        </div>
-                    </div>
-            </div>
 
             </div>
 
-            <!-- <div class="w3-row">
+        </div>
+
+        <!-- <div class="w3-row">
                     
                 </div> -->
 
-        </div>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-        <script src="./js/terminal.js"></script>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="./js/terminal.js"></script>
 
-        <script>
-            function ShowDockerDropdown() {
-                var x = document.getElementById("docker-dropdown");
-                if (x.className.indexOf("w3-show") == -1) {
-                    x.className += " w3-show";
-                } else {
-                    x.className = x.className.replace(" w3-show", "");
-                }
+    <script>
+        function ShowDockerDropdown() {
+            var x = document.getElementById("docker-dropdown");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
             }
-        </script>
+        }
+    </script>
 
 </body>
 
