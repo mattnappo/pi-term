@@ -46,3 +46,25 @@ header {
     padding: 8px 16px;
     color: white;
 }
+
+.launch-button {
+    background-color: #1f95f2;
+    color: white;
+    padding: 8px 16px;
+    margin-bottom: 16px;
+    margin-top: 0px;
+    text-align: center;
+    border-radius: 1px;
+    font-size: 16px;
+}
+
+.launch-button:hover {
+    color: #23273a;
+}
+
+.online {
+    border-radius: 50%;
+    background-color: #3be5e5;
+    height: 12px;
+    width: 12px;
+}
