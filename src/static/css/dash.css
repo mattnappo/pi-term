@@ -62,7 +62,14 @@ header {
     color: #23273a;
 }
 
-.online {
+.online-dot {
+    border-radius: 50%;
+    background-color: #3be5e5;
+    height: 12px;
+    width: 12px;
+}
+
+.inline-container {
     border-radius: 50%;
     background-color: #3be5e5;
     height: 12px;
