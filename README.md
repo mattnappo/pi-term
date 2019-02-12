@@ -19,6 +19,9 @@ A list of stuff that I still need to do on this project.
 1. Finish the mockups
  * Button JS
  * HTML sttucture
-### Client side
+### Server side
 1. Fix authentication
 2. Make the app work
+3. SSH re-initialization
+### Both
+1. Terminal newlines don't work
