@@ -1,5 +1,6 @@
 const NodeRSA = require("node-rsa");
-const exec = require("child_process").exec;
+// const exec = require("child_process").exec;
+const execSync = require("child_process").execSync;
 const fs = require("fs");
 
 const ips = [
@@ -31,13 +32,13 @@ function LoadPassword(raw) {
 
 // ping - Internal ping func, returns a promise w/ stdout of ping command on an IP
 function ping(ip) {
-     return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         let command = "ping -c 1 " + ip;
         exec(command, (error, stdout, stderr) => {
             if (error !== null) console.log("exec error: " + error);
             if (stdout != "") {
                 let rawTime = stdout.split("time=")[1].split(" ");
-                let time = rawTime[0] + " " + rawTime[1].split('\n')[0];
+                let time = rawTime[0] + " " + rawTime[1].split("\n")[0];
                 resolve(time);
             }
             else {
@@ -58,14 +59,24 @@ function Ping(ip) {
     });
 }
 
+/* BEGIN DEPRECATED */
+
 // PingAll - Ping all four of the Raspberry pis and return an object containing the ping promises
-function PingAll() {
+async function PingAll() {
     let promises = { };
     for (let i = 0; i < ips.length; i++) {
-        promises[ips[i]] = Ping(ips[i]);
+        promises[ips[i]] = await Ping(ips[i]).then(out, () => {
+            return out;
+        });
     }
     return promises;
 }
+
+/* END DEPRECATED */
+var er = Ping("192.168.1.100");
+console.log(er.then((out) => {
+    return out;
+}));
 
 module.exports = {
     LoadPassword: LoadPassword,

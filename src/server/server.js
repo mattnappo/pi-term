@@ -114,8 +114,11 @@ app.post("/getTerminalIp", (req, res) => {
 app.post("/statusData", (req, res) => {
     var pings = [];
     for (var i = 0; i < 4; i++) {
-        var ping = common.Ping("192.168.1.10" + i);
-        pings.append(ping);
+        var prom = common.PingAll()['192.168.1.103'];
+        prom.then(out => {
+            console.log(`OUT: ${out}`);
+        });
+
     }
 });
 
