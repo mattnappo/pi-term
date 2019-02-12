@@ -96,13 +96,8 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/terminal", (req, res) => {
-    res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "terminal.html"));
-    res.set("Content-Type", "text/json");
-    res.json({
-        username: "bob",
-        ip: "192.168.1.101"
-    });
+    res.json({ ip: "192.168.1.101" });
 });
 
 app.get("/test", (req, res) => {

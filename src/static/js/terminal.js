@@ -1,12 +1,11 @@
 var piIp = "";
 
-// Get the ip and username from the backend
+// Get the ip from the backend
 function SetTerminalData() {
     $.post("/terminal", {}, (res) => {
-        console.log(`username: ${res.username}\nip: ${res.ip}`);
-        piUsername = res.username;
+        console.log(`ip: ${res.ip}`);
         piIp = res.ip;
-        $(".prompt").html("[root@" + piUsername + "] # ");
+        $(".prompt").html("[root@" + res.ip + "] # ");
     });
 }
 
