@@ -111,8 +111,12 @@ app.post("/getTerminalIp", (req, res) => {
 
 // ----- END TERMINAL ROUTES -----
 
-app.get("/test", (req, res) => {
-    res.send("Tests succeeded - app is working properly");
+app.post("/statusData", (req, res) => {
+    var pings = [];
+    for (var i = 0; i < 4; i++) {
+        var ping = common.Ping("192.168.1.10" + i);
+        pings.append(ping);
+    }
 });
 
 app.post("/command", (req, res, next) => {
