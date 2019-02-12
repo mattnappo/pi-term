@@ -23,6 +23,7 @@ function LoadPassword(raw) {
     return key.decrypt(raw, "utf8");
 }
 
+// Export the necessary functions
 module.exports = {
     LoadPassword: LoadPassword,
     GenerateNewKey: GenerateNewKey

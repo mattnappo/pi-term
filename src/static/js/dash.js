@@ -1,6 +1,5 @@
 function getStatusData() {
-    $.post("/statusData", {}, (res) => {
-        
+    $.post("/statusData", {}, (res) => {       
         RenderStatusData(res.body);
     });
 }

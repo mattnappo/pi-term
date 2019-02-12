@@ -9,11 +9,13 @@ function SetTerminalData() {
     });
 }
 
+// Setup the terminal utilities
 var util = util || {};
 util.toArray = function (list) {
     return Array.prototype.slice.call(list || [], 0);
 };
 
+// Terminal - The terminal class
 var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
     window.URL = window.URL || window.webkitURL;
     window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
@@ -37,6 +39,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
         this.value = this.value;
     }
 
+    // Manage the history (up arrow) functionality of the terminal
     function historyHandler_(e) {
         if (history_.length) {
             if (e.keyCode == 38 || e.keyCode == 40) {
@@ -70,6 +73,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
         output_.insertAdjacentHTML("beforeEnd", "<p>" + html + "</p>");
     }
 
+    // Process the user's command (input)
     function processNewCommand_(e) {
         // Implement tab suggestions
         if (e.keyCode == 9) { // tab
@@ -122,6 +126,7 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
     }
 };
 
+// putline - write a line of text to the terminal screen
 function putline(line) {
     var output_ = document.querySelector(outputContainer);
     var p = document.createElement("p");
@@ -133,6 +138,7 @@ function putline(line) {
     document.getElementById("container").scrollTop = document.getElementById("container").scrollHeight;
 }
 
+// Initialize
 SetTerminalData();
 
 // Initialize a new terminal object

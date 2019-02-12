@@ -25,6 +25,7 @@ function PingAll() {
     return times;
 }
 
+// Export the necessary functions
 module.exports = {
     Ping: Ping,
     PingAll: PingAll
