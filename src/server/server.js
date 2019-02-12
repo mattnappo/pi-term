@@ -91,6 +91,22 @@ app.post("/login", (req, res, next) => {
         
 });
 
+app.get("/dashboard", (req, res) => {
+    console.log(`auth: ${authenticated}`)
+    if (authenticated == true) {
+        res.set("Content-Type", "text/html");
+        res.sendFile(path.resolve(__static, "dash.MOCKUP.html"));
+    } else {
+        res.redirect("/");
+    }
+    res.set("Content-Type", "text/html");
+    res.sendFile(path.resolve(__static, "login.html"));
+});
+
+app.get("/test", (req, res) => {
+    res.send("Tests succeeded - app is working properly");
+});
+
 app.get("/terminal", (req, res) => {
     console.log(`auth: ${authenticated}`)
     if (authenticated == true) {
