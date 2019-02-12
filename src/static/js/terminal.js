@@ -1,3 +1,15 @@
+var piIp = "";
+
+// Get the ip and username from the backend
+function SetTerminalData() {
+    $.post("/terminal", {}, (res) => {
+        console.log(`username: ${res.username}\nip: ${res.ip}`);
+        piUsername = res.username;
+        piIp = res.ip;
+        $(".prompt").html("[root@" + piUsername + "] # ");
+    });
+}
+
 var util = util || {};
 util.toArray = function (list) {
     return Array.prototype.slice.call(list || [], 0);
@@ -79,20 +91,12 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
             input.readOnly = true;
             output_.appendChild(line);
 
-            // if (this.value == "test") {
-            //     putline("text added!");
-            // }
             // Send the line to the backend
-            var currentAddress = document.getElementById("pi-ip").value;
-            console.log(`currentAddress: ${currentAddress}`);
             $.post("/command", {
                 line: this.value,
-                // address: "192.168.1.101"
-                address: currentAddress
+                address: piIp
             }, (res) => {
-                // var raw = String.raw(res.output);
                 putline(res.output);
-                // console.log(raw);
             });
 
             // Clear/setup line for next input.
@@ -130,10 +134,7 @@ function putline(line) {
     document.getElementById("container").scrollTop = document.getElementById("container").scrollHeight;
 }
 
-// Set the command-line prompt to include the user"s IP Address
-var currentUsername = document.getElementById("pi-username").value;
-console.log(`currentUsername: ${currentUsername}`);
-$(".prompt").html("[root@" + currentUsername + "] # ");
+SetTerminalData();
 
 // Initialize a new terminal object
 var outputContainer = "#container output";
