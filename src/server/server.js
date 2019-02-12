@@ -99,18 +99,14 @@ app.get("/test", (req, res) => {
 
 var currentIp = "";
 app.post("/terminal", (req, res) => {
+    console.log(`new current ip: ${req.body.ip}`);
+    currentIp = req.body.ip;
     res.sendFile(path.resolve(__static, "terminal.html"));
     // res.json({ ip: "192.168.1.100" });
 });
 
 app.post("/getTerminalIp", (req, res) => {
-    console.log(`req.body.ip: ${req.body.ip}`);
-    res.json({ ip: "192.168.1.100" });
-});
-
-app.post("/setTerminalIp", (req, res) => {
-    console.log(`new current ip: ${req.body.ip}`);
-    currentIp = req.body.ip;
+    res.json({ ip: currentIp });
 });
 
 // ----- END TERMINAL ROUTES -----

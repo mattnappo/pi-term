@@ -75,3 +75,7 @@ header {
     height: 12px;
     width: 12px;
 }
+
+input[type="hidden"] {
+    font-size: 0px;
+}
