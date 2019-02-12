@@ -1,3 +1,5 @@
 function NewTerminal() {
-    window.open("https://localhost/terminal");
+    // window.location.href = "terminal";
+    var win = window.open("terminal", "_blank");
+    win.focus();
 }
