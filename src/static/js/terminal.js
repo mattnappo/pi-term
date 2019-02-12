@@ -79,13 +79,16 @@ var Terminal = Terminal || function (cmdLineContainer, outputContainer) {
             input.readOnly = true;
             output_.appendChild(line);
 
-            if (this.value == "test") {
-                putline("text added!");
-            }
+            // if (this.value == "test") {
+            //     putline("text added!");
+            // }
             // Send the line to the backend
+            var currentAddress = document.getElementById("pi-ip").value;
+            console.log(`currentAddress: ${currentAddress}`);
             $.post("/command", {
                 line: this.value,
-                address: "192.168.1.101"
+                // address: "192.168.1.101"
+                address: currentAddress
             }, (res) => {
                 // var raw = String.raw(res.output);
                 putline(res.output);
@@ -128,7 +131,9 @@ function putline(line) {
 }
 
 // Set the command-line prompt to include the user"s IP Address
-$(".prompt").html("[root@PiOne] # ");
+var currentUsername = document.getElementById("pi-username").value;
+console.log(`currentUsername: ${currentUsername}`);
+$(".prompt").html("[root@" + currentUsername + "] # ");
 
 // Initialize a new terminal object
 var outputContainer = "#container output";
