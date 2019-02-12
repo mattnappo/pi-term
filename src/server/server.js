@@ -81,26 +81,14 @@ app.post("/login", (req, res, next) => {
     var user = req.body.username;
     var pass = req.body.password;
     console.log(`username: ${user}\npassword: ${pass}`);
-    if (user = "admin" && pass == "admin") {
-        authenticated = true;
-        res.redirect("/terminal");
-    } else {
-        authenticated = false;
-        res.redirect("/");
-    }
-        
+
+    res.set("Content-Type", "text/html");    
+    res.redirect("/dashboard");
 });
 
 app.get("/dashboard", (req, res) => {
-    console.log(`auth: ${authenticated}`)
-    if (authenticated == true) {
-        res.set("Content-Type", "text/html");
-        res.sendFile(path.resolve(__static, "dash.MOCKUP.html"));
-    } else {
-        res.redirect("/");
-    }
     res.set("Content-Type", "text/html");
-    res.sendFile(path.resolve(__static, "login.html"));
+    res.sendFile(path.resolve(__static, "dash.MOCKUP.html"));
 });
 
 app.get("/test", (req, res) => {
@@ -108,16 +96,8 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/terminal", (req, res) => {
-    console.log(`auth: ${authenticated}`)
-    if (authenticated == true) {
-        res.set("Content-Type", "text/html");
-        res.sendFile(path.resolve(__static, "terminal.html"));
-    } else {
-        console.log("WORKING");
-        res.redirect("/");
-    }
     res.set("Content-Type", "text/html");
-    res.sendFile(path.resolve(__static, "login.html"));
+    res.sendFile(path.resolve(__static, "terminal.html"));
 });
 
 app.get("/test", (req, res) => {
