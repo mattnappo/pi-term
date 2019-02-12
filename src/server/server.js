@@ -3,7 +3,8 @@ const path       = require("path");
 const bodyParser = require("body-parser");
 const SSH        = require("simple-ssh");
 
-const common     = require("./common");
+const crypto     = require("./crypto");
+const status     = require("./status");
 const conndata   = require("./data/conndata.json");
 
 /*    BEGIN SETUP    */
@@ -35,7 +36,7 @@ for (var conn in conndata) {
         var ssh = new SSH({
             host: conndata[conn].host,
             user: conndata[conn].user,
-            pass: common.LoadPassword(conndata[conn].pass)
+            pass: crypto.LoadPassword(conndata[conn].pass)
         });
         ssh.exec("hostname -I", {
             out: (stdout) => {
@@ -112,14 +113,8 @@ app.post("/getTerminalIp", (req, res) => {
 // ----- END TERMINAL ROUTES -----
 
 app.post("/statusData", (req, res) => {
-    var pings = [];
-    for (var i = 0; i < 4; i++) {
-        var prom = common.PingAll()['192.168.1.103'];
-        prom.then(out => {
-            console.log(`OUT: ${out}`);
-        });
-
-    }
+    var data = { };
+    var pings = status.PingAll();
 });
 
 app.post("/command", (req, res, next) => {
