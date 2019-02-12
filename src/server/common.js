@@ -1,5 +1,5 @@
 const NodeRSA = require("node-rsa");
-// const exec = require("child_process").exec;
+const exec = require("child_process").exec;
 const execSync = require("child_process").execSync;
 const fs = require("fs");
 
@@ -73,10 +73,19 @@ async function PingAll() {
 }
 
 /* END DEPRECATED */
-var er = Ping("192.168.1.100");
-console.log(er.then((out) => {
-    return out;
-}));
+// var er = Ping("192.168.1.100");
+// console.log(er.then((out) => {
+//     return out;
+// }));
+let ip = "192.168.1.1";
+let command = "ping -c 1 " + ip;
+let shit = code = execSync(command);
+console.log(shit);
+
+let json = JSON.stringify(shit);
+console.log(json);
+
+console.log(shit.toString('utf8'));
 
 module.exports = {
     LoadPassword: LoadPassword,
