@@ -74,7 +74,7 @@
                             </div>
                             <p>&nbsp;&nbsp;Ping: <span id="ping">2</span>ms</p>
                             <p>&nbsp;&nbsp;<span id="uptime">14:10  up 15 days, 15:47, 1 user, load averages: 1.55 1.99 2.05</span></p>
-                            <button class="launch-button" onclick="LaunchTerm('terminal0');">Launch Terminal</button>
+                            <button class="launch-button" onclick="LaunchTerm(0);">Launch Terminal</button>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                             </div>
                             <p>&nbsp;&nbsp;Ping: <span id="ping">2</span>ms</p>
                             <p>&nbsp;&nbsp;<span id="uptime">14:10  up 15 days, 15:47, 1 user, load averages: 1.55 1.99 2.05</span></p>
-                            <button class="launch-button" onclick="LaunchTerm('terminal1');">Launch Terminal</button>
+                            <button class="launch-button" onclick="LaunchTerm(1);">Launch Terminal</button>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                             </div>
                             <p>&nbsp;&nbsp;Ping: <span id="ping">2</span>ms</p>
                             <p>&nbsp;&nbsp;<span id="uptime">14:10  up 15 days, 15:47, 1 user, load averages: 1.55 1.99 2.05</span></p>
-                            <button class="launch-button" onclick="LaunchTerm('terminal2');">Launch Terminal</button>
+                            <button class="launch-button" onclick="LaunchTerm(2);">Launch Terminal</button>
                         </div>
                     </div>
                 </div>
@@ -127,11 +127,10 @@
                             </div>
                             <p>&nbsp;&nbsp;Ping: <span id="ping">2</span>ms</p>
                             <p>&nbsp;&nbsp;<span id="uptime">14:10  up 15 days, 15:47, 1 user, load averages: 1.55 1.99 2.05</span></p>
-                            <!-- <form action="/terminal" method="post">
+                            <form target="_blank" action="/setTerminalIp" method="post">
                                 <input type="text" name="ip" value="192.168.1.103" />
-                                
-                            </form> -->
-                            <button class="launch-button" onclick="LaunchTerm('terminal3');">Launch Terminal</button>
+                                <button class="launch-button">Launch Terminal</button>
+                            </form>
                         </div>
                     </div>
                 </div>

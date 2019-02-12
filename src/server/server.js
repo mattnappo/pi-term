@@ -95,10 +95,25 @@ app.get("/test", (req, res) => {
     res.send("Tests succeeded - app is working properly");
 });
 
+// ----- START TERMINAL ROUTES -----
+
+var currentIp = "";
 app.post("/terminal", (req, res) => {
     res.sendFile(path.resolve(__static, "terminal.html"));
-    res.json({ ip: "192.168.1.101" });
+    // res.json({ ip: "192.168.1.100" });
 });
+
+app.post("/getTerminalIp", (req, res) => {
+    console.log(`req.body.ip: ${req.body.ip}`);
+    res.json({ ip: "192.168.1.100" });
+});
+
+app.post("/setTerminalIp", (req, res) => {
+    console.log(`new current ip: ${req.body.ip}`);
+    currentIp = req.body.ip;
+});
+
+// ----- END TERMINAL ROUTES -----
 
 app.get("/test", (req, res) => {
     res.send("Tests succeeded - app is working properly");

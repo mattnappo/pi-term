@@ -11,3 +11,8 @@ function LaunchTerminal(ip) {
         // win.focus();
     });
 }
+
+function LaunchTerm(terminalNumber) {
+    var win = window.open("terminal" + terminalNumber, "_blank");
+    win.focus();
+}

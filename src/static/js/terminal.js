@@ -2,7 +2,7 @@ var piIp = "";
 
 // Get the ip from the backend
 function SetTerminalData() {
-    $.post("/terminal", {}, (res) => {
+    $.post("/terminalip", {}, (res) => {
         console.log(`ip: ${res.ip}`);
         piIp = res.ip;
         $(".prompt").html("[root@" + res.ip + "] # ");
