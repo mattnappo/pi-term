@@ -68,6 +68,19 @@ function SendCommand(command, id) {
     });
 }
 
+function GetUptimes() {
+    SendCommand("uptime", id)
+    .then(stdout => {
+        res.set("Content-Type", "text/json");
+        res.json({
+            output: stdout
+        });
+    })
+    .catch(error => {
+        console.log(`error - ${error}`);
+    });
+}
+
 /*    END NET    */
 
 
@@ -115,6 +128,10 @@ app.post("/getTerminalIp", (req, res) => {
 app.post("/statusData", (req, res) => {
     var data = { };
     var pings = status.PingAll();
+    data["pings"] = { };
+    data["pings"] = pings;
+    console.log(`DATA: ${data}`);
+    res.json(data);
 });
 
 app.post("/command", (req, res, next) => {
