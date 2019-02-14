@@ -130,7 +130,7 @@ app.post("/statusData", (req, res) => {
     var pings = status.PingAll();
     data["pings"] = { };
     data["pings"] = pings;
-    console.log(`DATA: ${data}`);
+    console.log(`DATA: ${JSON.stringify(data)}`);
     res.json(data);
 });
 
