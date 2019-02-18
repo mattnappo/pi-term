@@ -116,7 +116,7 @@ app.post("/terminal", (req, res) => {
     console.log(`new current ip: ${req.body.ip}`);
     currentIp = req.body.ip;
     res.sendFile(path.resolve(__static, "terminal.html"));
-    // res.json({ ip: "192.168.1.100" });
+    // res.json({ ip: "192.168.1.100" }); // Not needed (I don't think)
 });
 
 app.post("/getTerminalIp", (req, res) => {
@@ -126,11 +126,18 @@ app.post("/getTerminalIp", (req, res) => {
 // ----- END TERMINAL ROUTES -----
 
 app.post("/statusData", (req, res) => {
-    var data = { };
+    // Actual code
+    // var data = { };
+    // var pings = status.PingAll();
+    // data["pings"] = { };
+    // data["pings"] = pings;
+    // console.log(`DATA: ${JSON.stringify(data)}`);
+    // res.json(data);
+
+    // Test code
     var pings = status.PingAll();
-    data["pings"] = { };
-    data["pings"] = pings;
-    console.log(`DATA: ${JSON.stringify(data)}`);
+    console.log(`PINGS: ${pings}`);
+    
     res.json(data);
 });
 
