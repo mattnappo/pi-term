@@ -1,11 +1,5 @@
 const execSync = require("child_process").execSync;
-
-const ips = [
-    // "192.168.1.100", // Offline right now
-    "192.168.1.101",
-    "192.168.1.102",
-    "192.168.1.103"
-];
+const ips = require("./ips").ips;
 
 // Ping - Return the ping of a local IP address (in ms)
 function Ping(ip) {

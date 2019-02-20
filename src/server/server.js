@@ -125,8 +125,10 @@ app.post("/getTerminalIp", (req, res) => {
 
 // ----- END TERMINAL ROUTES -----
 
-app.post("/statusData", (req, res) => {
+
+app.get("/statusData", (req, res) => {
     // Actual code
+    var pings = status.PingAll();
     // var data = { };
     // var pings = status.PingAll();
     // data["pings"] = { };
@@ -135,10 +137,10 @@ app.post("/statusData", (req, res) => {
     // res.json(data);
 
     // Test code
-    var pings = status.PingAll();
-    console.log(`PINGS: ${pings}`);
     
-    res.json(data);
+    console.log(`PINGS: ${JSON.stringify(pings)}`);
+    
+    res.send(JSON.stringify(pings));
 });
 
 app.post("/command", (req, res, next) => {
