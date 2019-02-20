@@ -11,7 +11,7 @@ function GetStatusData() {
             const pingpis = JSON.parse(Http.responseText)["pings"];
             for (var pi in pingpis) {
                 if (pingpis.hasOwnProperty(pi)) {
-                    document.getElementById("ping" + pi[pi.length - 1]).innerHTML = pingpis[pi];
+                    document.getElementById("ping" + pi[pi.length - 1]).innerHTML = "Ping: " + pingpis[pi];
                 }
             }
 
