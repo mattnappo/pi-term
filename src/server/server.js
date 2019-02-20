@@ -69,18 +69,23 @@ function SendCommand(command, id) {
 
 
 async function GetUptimes() {
-    const uptime0 = await SendCommand("uptime", 0);
-    console.log(`uptime0: ${uptime0}`);
-    // const uptime1
-    // const uptime2
-    // const uptime3
-    // let uptimes = [];
-    // for (let i = 0; i < 4; i++) {
-    //     let uptime = SendCommand("uptime", i);
-    //     uptimes.push(uptime);
-    // }
+    let uptimes = [];
+    for (let i = 0; i < 4; i++) {
+        let uptime = await SendCommand("uptime", i);
+        uptimes.push(uptime);
+    }
+    const data = {
+        "uptime0": uptimes[0],
+        "uptime1": uptimes[1],
+        "uptime2": uptimes[2],
+        "uptime3": uptimes[3]
+    };
+    return data;
 }
-GetUptimes();
+
+GetUptimes().then((uptimes) => {
+    console.log(uptimes);
+})
 
 /*    END NET    */
 
