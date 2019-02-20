@@ -10,8 +10,8 @@ const conndata = require("./data/conndata.json");
 
 // Enable logging?
 logger.enableLogging();
-// Print the timestamps?
-// logger.showTimestamps();
+// Show timestamps?
+logger.raw();
 
 /*    BEGIN SETUP    */
 

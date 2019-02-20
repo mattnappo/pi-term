@@ -4,7 +4,7 @@ const fs = require("fs");
 
 var settings = {
     enabled: false,
-    showTimestamps: false,
+    raw: false,
     location: "./logs"
 };
 
@@ -19,19 +19,19 @@ function enableLogging() {
     settings.enabled = true;
 }
 
-function showTimestamps() {
-    settings.showTimestamps = true;
+function raw() {
+    settings.raw = true;
 }
 
 function log(s) {
     if (s != "") {
         currentLog = currentLog + s + time() + "\n";
-        s = "===== " + s + " =====";
         if (settings.enabled) {
-            if (settings.showTimestamps) {
+            if (settings.raw) {
                 console.log(s + time());
             }
             else {
+                s = "===== " + s + " =====";
                 console.log(s);
             }
         }
@@ -46,7 +46,7 @@ function exportLog() {
 
 module.exports = {
     enableLogging: enableLogging,
-    showTimestamps: showTimestamps,
+    raw: raw,
     log: log,
     exportLog: exportLog
 }
