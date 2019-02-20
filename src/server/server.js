@@ -67,7 +67,7 @@ function SendCommand(command, id) {
     });
 }
 
-
+// GetUptimes - Return a promise of an object of the uptimes for each one of the raspis
 async function GetUptimes() {
     let uptimes = [];
     for (let i = 0; i < 4; i++) {
@@ -82,10 +82,6 @@ async function GetUptimes() {
     };
     return data;
 }
-
-GetUptimes().then((uptimes) => {
-    console.log(uptimes);
-})
 
 /*    END NET    */
 
@@ -160,10 +156,16 @@ app.post("/getTerminalIp", (req, res) => {
 
 // ----- START STATUS ROUTES -----
 
-app.get("/pingData", (req, res) => {
-    var pings = status.PingAll();
-    // console.log(`PINGS: ${JSON.stringify(pings)}`);
-    res.send(JSON.stringify(pings));
+app.get("/statusData", (req, res) => {
+
+    GetUptimes().then(uptimes => {
+        var pings = status.PingAll();
+        const data = {
+            "pings": pings,
+            "uptimes": uptimes
+        };
+        res.send(JSON.stringify(data));
+    });
 });
 
 
