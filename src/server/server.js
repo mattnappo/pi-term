@@ -40,7 +40,7 @@ for (var conn in conndata) {
         });
         ssh.exec("hostname -I", {
             out: (stdout) => {
-                console.log(`SSH initialized for ${stdout}`);
+                // console.log(`SSH initialized for ${stdout}`);
             }
         }).start();
         connections.push(ssh);
@@ -67,18 +67,20 @@ function SendCommand(command, id) {
     });
 }
 
-function GetUptimes() {
-    SendCommand("uptime", id)
-        .then(stdout => {
-            res.set("Content-Type", "text/json");
-            res.json({
-                output: stdout
-            });
-        })
-        .catch(error => {
-            console.log(`error - ${error}`);
-        });
+
+async function GetUptimes() {
+    const uptime0 = await SendCommand("uptime", 0);
+    console.log(`uptime0: ${uptime0}`);
+    // const uptime1
+    // const uptime2
+    // const uptime3
+    // let uptimes = [];
+    // for (let i = 0; i < 4; i++) {
+    //     let uptime = SendCommand("uptime", i);
+    //     uptimes.push(uptime);
+    // }
 }
+GetUptimes();
 
 /*    END NET    */
 
@@ -109,7 +111,7 @@ app.post("/command", (req, res, next) => {
     const line = req.body.line;
     const address = req.body.address;
     var id = parseInt(address[address.length - 1]);
-    console.log(`server received command "${line}" for address "${address}"`);
+    console.log(`server received command "${line}" for address "${address}" (id: ${id})`);
 
     SendCommand(line, id)
         .then(stdout => {
@@ -161,9 +163,7 @@ app.get("/pingData", (req, res) => {
 
 
 app.get("/uptimeData", (req, res) => {
-    var uptimes = status.PingAll();
-    // console.log(`PINGS: ${JSON.stringify(pings)}`);
-    res.send(JSON.stringify(pings));
+    
 });
 
 // ----- END STATUS ROUTES -----
