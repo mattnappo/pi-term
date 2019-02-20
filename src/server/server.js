@@ -3,9 +3,9 @@ const path       = require("path");
 const bodyParser = require("body-parser");
 const SSH        = require("simple-ssh");
 
-const crypto     = require("./crypto");
-const status     = require("./status");
-const conndata   = require("./data/conndata.json");
+const crypto   = require("./crypto");
+const status   = require("./status");
+const conndata = require("./data/conndata.json");
 
 /*    BEGIN SETUP    */
 
@@ -59,8 +59,7 @@ function SendCommand(command, id) {
             out: (stdout) => {
                 if (stdout != "") {
                     resolve(stdout);
-                }
-                else {
+                } else {
                     reject("error retrieving stdout for command '" + line + "'");
                 }
             }
@@ -70,15 +69,15 @@ function SendCommand(command, id) {
 
 function GetUptimes() {
     SendCommand("uptime", id)
-    .then(stdout => {
-        res.set("Content-Type", "text/json");
-        res.json({
-            output: stdout
+        .then(stdout => {
+            res.set("Content-Type", "text/json");
+            res.json({
+                output: stdout
+            });
+        })
+        .catch(error => {
+            console.log(`error - ${error}`);
         });
-    })
-    .catch(error => {
-        console.log(`error - ${error}`);
-    });
 }
 
 /*    END NET    */
@@ -96,13 +95,35 @@ app.post("/login", (req, res, next) => {
     var pass = req.body.password;
     console.log(`username: ${user}\npassword: ${pass}`);
 
-    res.set("Content-Type", "text/html");    
+    res.set("Content-Type", "text/html");
     res.redirect("/dashboard");
 });
 
 app.get("/dashboard", (req, res) => {
     res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "dash.MOCKUP.html"));
+});
+
+app.post("/command", (req, res, next) => {
+    // Get the command and IP from user input on frontend
+    const line = req.body.line;
+    const address = req.body.address;
+    var id = parseInt(address[address.length - 1]);
+    console.log(`server received command "${line}" for address "${address}"`);
+
+    SendCommand(line, id)
+        .then(stdout => {
+            // console.log(String.Raw`stdout`);
+            console.log(String.raw `/\//`.match(stdout));
+            res.set("Content-Type", "text/json");
+            res.json({
+                output: stdout
+            });
+        })
+        .catch(error => {
+            console.log(`error - ${error}`);
+        });
+
 });
 
 app.get("/test", (req, res) => {
@@ -119,51 +140,33 @@ app.post("/terminal", (req, res) => {
     // res.json({ ip: "192.168.1.100" }); // Not needed (I don't think)
 });
 
+// This is a bad solution. It is more like a workaround.
+// I'll fix this later
 app.post("/getTerminalIp", (req, res) => {
-    res.json({ ip: currentIp });
+    res.json({
+        ip: currentIp
+    });
 });
 
 // ----- END TERMINAL ROUTES -----
 
 
-app.get("/statusData", (req, res) => {
-    // Actual code
-    var pings = status.PingAll();
-    // var data = { };
-    // var pings = status.PingAll();
-    // data["pings"] = { };
-    // data["pings"] = pings;
-    // console.log(`DATA: ${JSON.stringify(data)}`);
-    // res.json(data);
+// ----- START STATUS ROUTES -----
 
-    // Test code
-    
-    console.log(`PINGS: ${JSON.stringify(pings)}`);
-    
+app.get("/pingData", (req, res) => {
+    var pings = status.PingAll();
+    // console.log(`PINGS: ${JSON.stringify(pings)}`);
     res.send(JSON.stringify(pings));
 });
 
-app.post("/command", (req, res, next) => {
-    // Get the command and IP from user input on frontend
-    const line = req.body.line;
-    const address = req.body.address;
-    var id = parseInt(address[address.length - 1]);    
-    console.log(`server received command "${line}" for address "${address}"`);
 
-    SendCommand(line, id)
-    .then(stdout => {
-        // console.log(String.Raw`stdout`);
-        console.log(String.raw`/\//` .match (stdout));
-        res.set("Content-Type", "text/json");
-        res.json({
-            output: stdout
-        });
-    })
-    .catch(error => {
-        console.log(`error - ${error}`);
-    });
-
+app.get("/uptimeData", (req, res) => {
+    var uptimes = status.PingAll();
+    // console.log(`PINGS: ${JSON.stringify(pings)}`);
+    res.send(JSON.stringify(pings));
 });
+
+// ----- END STATUS ROUTES -----
 
 /*    END ROUTES    */
 

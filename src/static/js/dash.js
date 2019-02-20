@@ -1,7 +1,7 @@
-
+// GetPingData - Get the pign times for all of the pis and render them to the DOM
 function GetPingData() {
     const Http = new XMLHttpRequest();
-    const url= "/statusData";
+    const url= "/pingData";
     Http.open("GET", url);
     Http.send();
 
@@ -17,7 +17,6 @@ function GetPingData() {
             }
         }
     }
-
 }
 
 (function() {
