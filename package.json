@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "node-rsa": "^1.0.2",
-    "simple-ssh": "^1.0.0"
+    "simple-ssh": "^1.0.0",
+    "command-line-args": "^5.0.2"
   }
 }
