@@ -1,5 +1,6 @@
 const NodeRSA = require("node-rsa");
-const fs = require("fs");
+const md5     = require("md5");
+const fs      = require("fs");
 
 // GenerateNewKey - Generate a new RSA key
 function GenerateNewKey() {
@@ -23,8 +24,26 @@ function LoadPassword(raw) {
     return key.decrypt(raw, "utf8");
 }
 
+// hashCode - Hash a string
+String.prototype.hashCode = function () {
+    var hash = 0, i, chr;
+    if (this.length === 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        chr = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+};
+
+// Hash - Return the md5 hash of a string
+function Hash(s) {
+    return md5(s);
+}
+
 // Export the necessary functions
 module.exports = {
     LoadPassword: LoadPassword,
-    GenerateNewKey: GenerateNewKey
+    GenerateNewKey: GenerateNewKey,
+    Hash: Hash
 };

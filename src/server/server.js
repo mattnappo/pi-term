@@ -10,6 +10,8 @@ const conndata = require("./data/conndata.json");
 
 // Enable logging?
 logger.enableLogging();
+// Print the timestamps?
+// logger.showTimestamps();
 
 /*    BEGIN SETUP    */
 
@@ -28,7 +30,7 @@ app.use(express.static(__static, options));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-logger.log(`===== SERVER: Setup complete =====`);
+logger.log(`SERVER: Setup complete`);
 
 /*    END SETUP    */
 
@@ -46,7 +48,7 @@ for (var conn in conndata) {
         ssh.exec("hostname -I", {
             out: (stdout) => {
                 let trimmed = stdout.trim();
-                logger.log(`===== SSH: Initialized ${trimmed} =====`);
+                logger.log(`SSH: Initialized ${trimmed}`);
             }
         }).start();
         connections.push(ssh);
@@ -95,37 +97,37 @@ async function GetUptimes() {
 /*    BEGIN ROUTES    */
 
 app.get("/", (req, res) => {
-    logger.log(`===== GET: / =====`);
+    logger.log(`GET: /`);
     res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "login.html"));
-    logger.log(`===== SENT: / =====`);
+    logger.log(`SENT: /`);
 });
 
 app.post("/login", (req, res, next) => {
-    logger.log(`===== POST: login =====`);
+    logger.log(`POST: login`);
     var user = req.body.username;
     var pass = req.body.password;
     console.log(`username: ${user}\npassword: ${pass}`);
 
     res.set("Content-Type", "text/html");
-    logger.log(`===== REDIRECT: login -> dashboard =====`);
+    logger.log(`REDIRECT: login -> dashboard`);
     res.redirect("/dashboard");
 });
 
 app.get("/dashboard", (req, res) => {
-    logger.log(`===== GET: dashboard =====`);
+    logger.log(`GET: dashboard`);
     res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "dash.MOCKUP.html"));
-    logger.log(`===== SENT: dashboard =====`);
+    logger.log(`SENT: dashboard`);
 });
 
 app.post("/command", (req, res, next) => {
-    logger.log(`===== POST: command =====`);
+    logger.log(`POST: command`);
     // Get the command and IP from user input on frontend
     const line = req.body.line;
     const address = req.body.address;
     var id = parseInt(address[address.length - 1]);
-    logger.log(`===== COMMAND: Received command "${line}" for address "${address}" (id: ${id}) =====`);
+    logger.log(`COMMAND: Received command "${line}" for address "${address}" (id: ${id})`);
 
     SendCommand(line, id)
         .then(stdout => {
@@ -135,7 +137,7 @@ app.post("/command", (req, res, next) => {
             res.json({
                 output: stdout
             });
-            logger.log(`===== SENT: command =====`);
+            logger.log(`SENT: command`);
         })
         .catch(error => {
             console.log(`error - ${error}`);
@@ -151,20 +153,20 @@ app.get("/test", (req, res) => {
 
 var currentIp = "";
 app.post("/terminal", (req, res) => {
-    logger.log(`===== POST: terminal =====`);
+    logger.log(`POST: terminal`);
     currentIp = req.body.ip;
     res.sendFile(path.resolve(__static, "terminal.html"));
-    logger.log(`===== SENT: terminal =====`);
+    logger.log(`SENT: terminal`);
 });
 
 // This is a bad solution. It is more like a workaround.
 // I'll fix this later
 app.post("/getTerminalIp", (req, res) => {
-    logger.log(`===== POST: getTerminalIp =====`);
+    logger.log(`POST: getTerminalIp`);
     res.json({
         ip: currentIp
     });
-    logger.log(`===== SENT: getTerminalIp =====`);
+    logger.log(`SENT: getTerminalIp`);
 });
 
 // ----- END TERMINAL ROUTES -----
@@ -173,7 +175,7 @@ app.post("/getTerminalIp", (req, res) => {
 // ----- START STATUS ROUTES -----
 
 app.get("/statusData", (req, res) => {
-    logger.log(`===== GET: statusData =====`);
+    logger.log(`GET: statusData`);
     GetUptimes().then(uptimes => {
         var pings = status.PingAll();
         const data = {
@@ -181,7 +183,7 @@ app.get("/statusData", (req, res) => {
             "uptimes": uptimes
         };
         res.send(JSON.stringify(data));
-        logger.log(`===== SENT: statusData =====`);
+        logger.log(`SENT: statusData`);
     });
 });
 
@@ -193,7 +195,10 @@ app.get("/statusData", (req, res) => {
 /*    START SERVER    */
 
 app.listen(port, () => {
-    logger.log(`===== SERVER: Initiated on port ${port} =====`);
+    logger.log(`SERVER: Initiated on port ${port}`);
 });
 
 /*    END SERVER    */
+
+
+/*    DON'T CLOSE APP    */
