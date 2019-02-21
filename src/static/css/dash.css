@@ -15,6 +15,7 @@ header {
     padding: 1px;
     border-radius: 4px;
     margin-bottom: 2px;
+    cursor: pointer;
 }
 
 .li:hover {

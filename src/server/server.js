@@ -11,7 +11,7 @@ const conndata = require("./data/conndata.json");
 // Enable logging?
 logger.enableLogging();
 // Show timestamps?
-logger.raw();
+// logger.raw();
 
 /*    BEGIN SETUP    */
 
@@ -117,8 +117,15 @@ app.post("/login", (req, res, next) => {
 app.get("/dashboard", (req, res) => {
     logger.log(`GET: dashboard`);
     res.set("Content-Type", "text/html");
-    res.sendFile(path.resolve(__static, "dash.MOCKUP.html"));
+    res.sendFile(path.resolve(__static, "dash.html"));
     logger.log(`SENT: dashboard`);
+});
+
+app.get("/docker", (req, res) => {
+    logger.log(`GET: docker`);
+    res.set("Content-Type", "text/html");
+    res.sendFile(path.resolve(__static, "docker.html"));
+    logger.log(`SENT: docker`);
 });
 
 app.post("/command", (req, res, next) => {
