@@ -128,6 +128,13 @@ app.get("/docker", (req, res) => {
     logger.log(`SENT: docker`);
 });
 
+app.get("/git", (req, res) => {
+    logger.log(`GET: git`);
+    res.set("Content-Type", "text/html");
+    res.sendFile(path.resolve(__static, "git.html"));
+    logger.log(`SENT: git`);
+});
+
 app.post("/command", (req, res, next) => {
     logger.log(`POST: command`);
     // Get the command and IP from user input on frontend
