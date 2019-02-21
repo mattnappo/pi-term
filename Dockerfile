@@ -19,7 +19,6 @@ EXPOSE 3000
 # Run the app
 CMD [ "npm", "run", "server" ]
 
-
 # Running the docker file:
 
 # Start by building the image:
@@ -34,3 +33,4 @@ CMD [ "npm", "run", "server" ]
 # docker container is a nice command
 # docker logs <container id> shows the container's logs
 # docker exec -it <container id> /bin/bash to enter the container
+# docker kill <container id> to kill the container

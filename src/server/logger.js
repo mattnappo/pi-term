@@ -1,36 +1,43 @@
 const crypto = require("./crypto");
-const path = require("path");
-const fs = require("fs");
+const path   = require("path");
+const fs     = require("fs");
 
+// settings - Configure the logger's settings / defaults
 var settings = {
     enabled: false,
     raw: false,
     location: "./logs"
 };
 
-var currentLog = [ ];
+// A string containing all of the logs
+var currentLog = "";
+
+// The name of the log file to export (random)
 var logName = crypto.Hash(Date().toString()).substring(1, 9);
 
+// time - Date() wrapper to get the current time
 function time() {
     return " @ " + Date().toString();
 }
 
+// enableLogging - Enable the logger's printing functionality
 function enableLogging() {
     settings.enabled = true;
 }
 
+// raw - Print the logs with timestamps and without formatting to the screen
 function raw() {
     settings.raw = true;
 }
 
+// log - Print out the log to the screen and save to the current, overall log
 function log(s) {
     if (s != "") {
         currentLog = currentLog + s + time() + "\n";
         if (settings.enabled) {
             if (settings.raw) {
                 console.log(s + time());
-            }
-            else {
+            } else {
                 s = "===== " + s + " =====";
                 console.log(s);
             }
@@ -38,12 +45,16 @@ function log(s) {
     }
 }
 
+// exportLog - Write the current log to a file
 function exportLog() {
     if (!fs.existsSync(settings.location)) fs.mkdirSync(settings.location);
     let loc = path.resolve(settings.location, logName + ".log");
-    fs.writeFileSync(loc, currentLog, { mode: 0o755 });
+    fs.writeFileSync(loc, currentLog, {
+        mode: 0o755
+    });
 }
 
+// Export the necessary methods
 module.exports = {
     enableLogging: enableLogging,
     raw: raw,
@@ -51,6 +62,7 @@ module.exports = {
     exportLog: exportLog
 }
 
+// The rest of the code makes sure that the log gets exported when the program exits
 process.stdin.resume();
 
 function exitHandler(options, exitCode) {

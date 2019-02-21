@@ -1,10 +1,12 @@
 // GetStatusData - Get the ping times and uptimes for all of the pis, and render them to the DOM
 function GetStatusData() {
+    // Setup the request
     const Http = new XMLHttpRequest();
-    const url= "/statusData";
+    const url = "/statusData";
     Http.open("GET", url);
     Http.send();
 
+    // Parse the request
     Http.onreadystatechange = (e) => {
         if (Http.responseText != "") {
             // Render the pings
@@ -26,6 +28,7 @@ function GetStatusData() {
     }
 }
 
-(function() {
+// Run on load
+(function () {
     GetStatusData();
 })();
