@@ -133,7 +133,7 @@ app.get("/docker", (req, res) => {
 app.get("/dockerData", (req, res) => {
     logger.log(`GET: dockerData`);
     let output = common.LocalCommand("node $HOME/git/pi-term/src/server/helpers/helper.js --dockerinfo");
-    console.log(output);
+    // console.log(output);
     res.send(output);
     logger.log(`SENT: dockerData`);
 });
