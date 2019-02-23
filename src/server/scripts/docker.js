@@ -1,4 +1,6 @@
+// Imports
 const execSync = require("child_process").execSync;
+const fs = require("fs");
 
 // sendCommandAndParse - Exec a command on the host and parse it accordingly
 function sendCommandAndParse(command) {
@@ -8,9 +10,13 @@ function sendCommandAndParse(command) {
     return parsed;
 }
 
+// The object containing the host's docker image data
 const data = {
     repositories: sendCommandAndParse("docker images --format '{{json .Repository}}'"),
     created: sendCommandAndParse("docker images --format '{{json .CreatedSince}}'")
 };
 
-console.log(data);
+// Write to file
+fs.writeFile("dockerpull.txt", JSON.stringify(data), function(err, data) {
+    if (err) console.log(err);
+});
