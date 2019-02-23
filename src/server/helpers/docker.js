@@ -1,4 +1,3 @@
-// Imports
 const execSync = require("child_process").execSync;
 const fs = require("fs");
 
@@ -47,10 +46,16 @@ function GetInfo() {
         images: GetImageInfo(),
         container: GetContinerInfo()
     }
-    
+
     // Write to file
     fs.writeFile("docker.info", JSON.stringify(data), function (err, data) {
         if (err) console.log(err);
+    });
+
+    // Read and print from file
+    fs.readFile("docker.info", "utf8", function (err, contents) {
+        if (err) console.log(err);
+        console.log(contents);
     });
 }
 

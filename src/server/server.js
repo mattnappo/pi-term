@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const SSH        = require("simple-ssh");
 
 const crypto   = require("./crypto");
+const common   = require("./common");
 const status   = require("./status");
 const logger   = require("./logger");
 const conndata = require("./data/conndata.json");
@@ -127,6 +128,14 @@ app.get("/docker", (req, res) => {
     res.set("Content-Type", "text/html");
     res.sendFile(path.resolve(__static, "docker.html"));
     logger.log(`SENT: docker`);
+});
+
+app.get("/dockerData", (req, res) => {
+    logger.log(`GET: dockerData`);
+    let output = common.LocalCommand("node $HOME/git/pi-term/src/server/helpers/helper.js --dockerinfo");
+    console.log(output);
+    res.send(output);
+    logger.log(`SENT: dockerData`);
 });
 
 app.get("/git", (req, res) => {
