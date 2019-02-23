@@ -19,7 +19,7 @@ function getAllJson() {
     let stdout = execSync(command).toString("utf8");
     JSON.stringify(stdout, null, "\t"); // stringify with tabs inserted at each level
     JSON.stringify(stdout, null, 4);    // stringify with 4 spaces at each level
-    
+    console.log(stdout);
 }
 
 // getRepos();
