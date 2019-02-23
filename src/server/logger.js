@@ -6,6 +6,7 @@ const fs     = require("fs");
 var settings = {
     enabled: false,
     raw: false,
+    export: true,
     location: "./logs"
 };
 
@@ -23,6 +24,11 @@ function time() {
 // enableLogging - Enable the logger's printing functionality
 function enableLogging() {
     settings.enabled = true;
+}
+
+// disableExport - Disable exporting of the logs
+function disableExport() {
+    settings.export = false;
 }
 
 // raw - Print the logs with timestamps and without formatting to the screen
@@ -59,14 +65,22 @@ module.exports = {
     enableLogging: enableLogging,
     raw: raw,
     log: log,
-    exportLog: exportLog
+    exportLog: exportLog,
+    disableExport: disableExport
 }
 
 // The rest of the code makes sure that the log gets exported when the program exits
 process.stdin.resume();
 
 function exitHandler(options, exitCode) {
-    if (options.cleanup) exportLog();
+    if (options.cleanup) {
+        if (settings.export) { // Only export the log if it is enabled
+            exportLog();
+        }
+        else {
+            log(`LOGGER: Exporting disabled`);
+        }
+    }
     if (exitCode || exitCode === 0) console.log(exitCode);
     if (options.exit) process.exit();
 }

@@ -10,6 +10,7 @@ const conndata = require("./data/conndata.json");
 
 // Enable logging?
 logger.enableLogging();
+logger.disableExport(); // Don't export the log
 // Show timestamps?
 // logger.raw();
 
@@ -143,6 +144,7 @@ app.post("/command", (req, res, next) => {
     var id = parseInt(address[address.length - 1]);
     logger.log(`COMMAND: Received command "${line}" for address "${address}" (id: ${id})`);
 
+    // Send the command
     SendCommand(line, id)
         .then(stdout => {
             // console.log(String.Raw`stdout`);
