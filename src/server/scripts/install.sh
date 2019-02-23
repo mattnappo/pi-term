@@ -1,3 +1,4 @@
+#!/bin/bash
 # Get the repo
 mkdir -p ~/git
 cd ~/git
