@@ -3,8 +3,6 @@ A web app to send commands to Raspberry Pis and manage their Dockerfiles.
 
 ![UI Demo](https://github.com/xoreo/pi-term/raw/master/src/static/img/demo.png "UI Demo")
 
-<br>
-
 ![UI Demo](https://github.com/xoreo/pi-term/raw/master/src/static/img/demo2.png "UI Demo")
 
 ## Start the Web Server
