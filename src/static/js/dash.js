@@ -6,9 +6,11 @@ function GetStatusData() {
     Http.open("GET", url);
     Http.send();
 
+    
     // Parse the request
     Http.onreadystatechange = (e) => {
         if (Http.responseText != "") {
+            console.log(Http.responseText); // Print the res
             // Render the pings
             const pingpis = JSON.parse(Http.responseText)["pings"];
             for (var pi in pingpis) {
