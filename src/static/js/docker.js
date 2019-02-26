@@ -28,9 +28,15 @@ function GetDockerData() {
             let div = document.getElementById("docker-image-names");
             for (let i = 0; i < images["repositories"].length; i++) {
                 console.log(`i: ${images["repositories"][i]}`);
-                let p = document.createElement("p");
-                p.innerHTML = images["repositories"][i];
-                div.appendChild(p);
+                let pRepoName = document.createElement("p");
+                pRepoName.innerHTML = images["repositories"][i];
+                div.appendChild(pRepoName);
+                
+                let createdDiv = document.getElementById("docker-image-times");
+                let pTimeCreated = document.createElement("p");
+                pTimeCreated.innerHTML = images["created"][i];
+                createdDiv.appendChild(pTimeCreated);
+
             }
         }
     }

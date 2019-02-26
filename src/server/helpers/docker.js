@@ -44,7 +44,7 @@ function GetContinerInfo() {
 function GetInfo() {
     let data = {
         images: GetImageInfo(),
-        container: GetContinerInfo()
+        containers: GetContinerInfo()
     }
 
     // Write to file

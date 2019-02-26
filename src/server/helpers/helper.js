@@ -1,7 +1,7 @@
 const docker = require("./docker");
 const cpu = require("./cpu");
 
-// I am aware that this is a really shitty solution to this whole problem
+// I am aware that this is a really bad solution to this whole problem
 if (process.argv[2] == "--dockerinfo") {
     docker.GetInfo();
     /*
