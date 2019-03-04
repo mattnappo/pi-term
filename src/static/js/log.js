@@ -9,12 +9,17 @@ function GetLogData() {
     // Parse the request
     req.onreadystatechange = (e) => {
         if (req.responseText != "") {
-            // Render the pings
-            let log = JSON.parse(req.responseText)["log"];
-            log = JSON.stringify(log);
+            console.log(req.responseText);
+            // Parse the request
+            let res = JSON.parse(req.responseText);
+            
+            // Render the container id
+            let idDiv = document.getElementById("id");
+            idDiv.innerHTML = res["id"];
 
+            // Render the log
             let logDiv = document.getElementById("log");
-            logDiv.innerHTML = log;
+            logDiv.innerHTML = res["log"];
         }
     }
 }

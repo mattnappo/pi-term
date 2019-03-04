@@ -154,7 +154,10 @@ app.post("/viewLog", (req, res, next) => {
 app.get("/getContainerLog", (req, res, next) => {
     logger.log(`GET: getContainerLog`);
     let output = common.LocalCommand("docker logs " + currentContainerId);
-    res.send(output);
+    res.send({
+        log: output,
+        id: currentContainerId
+    });
     logger.log(`SENT: getContainerLog`);
 });
 
