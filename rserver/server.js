@@ -8,19 +8,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.get("/test", (req, res) => {
-    res.send("successsss!");
-});
+app.get("/", (req, res) => {
+    console.log("--- GET: /test ---");
 
-app.post("/txn", (req, res) => {
-    var sender = req.body.account;
-    var recipient = req.body.account1;
-    var amount = req.body.amount;
-    var nonce = req.body.nonce;
-    var payload = req.body.payload;
+    console.log(`user queried ${req.query.msg}`);
 
-    console.log(`sender: ${sender}\nrecipient: ${recipient}\namount: ${amount}\nnonce: ${nonce}\payload: ${payload}`);
-    res.send("you win");
+    res.send("you said " + req.query.msg);
 });
 
 app.listen(port, () => {

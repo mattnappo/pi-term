@@ -58,6 +58,11 @@ function GetDockerData() {
                 
                 // Loop through the containers
                 console.log(containers["id"].length);
+                if (containers["id"].length <= 1) {
+                    return false;
+                } else {
+                    document.getElementById("no-containers").remove();
+                }
                 for (let i = 0; i < containers["id"].length - 1; i++) {
                     // Extract the container data
                     let id = containers["id"][i];
