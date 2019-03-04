@@ -27,6 +27,7 @@ Some stuff that I still need to do.
 1. Fix authentication
 2. SSH re-initialization
 3. ~~Status page backend~~
+4. ~~Implement a logger~~
 ### Issues
 1. Terminal newlines don't work
 2. Everything is kind of slow (not completely sure)

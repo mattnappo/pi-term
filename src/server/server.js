@@ -25,7 +25,7 @@ const options = {
     dotfiles: "ignore",
     extensions: ["html", "css", "js"],
     setHeaders: (res, path, stat) => {
-        res.set("x-timestamp", Date.now())
+        res.set("x-timestamp", Date.now());
     }
 };
 app.use(express.static(__static, options));

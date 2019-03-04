@@ -18,28 +18,45 @@ function GetDockerData() {
 
     // Parse the request
     req.onreadystatechange = (e) => {
-        if (req.responseText != "") {
-            console.log(req.responseText);
-            
-            const parsed = JSON.parse(req.responseText);
-            const images = parsed["images"];
-            const containers = parsed["containers"];
-
-            let div = document.getElementById("docker-image-names");
-            for (let i = 0; i < images["repositories"].length; i++) {
-                console.log(`i: ${images["repositories"][i]}`);
-                let pRepoName = document.createElement("p");
-                pRepoName.innerHTML = images["repositories"][i];
-                div.appendChild(pRepoName);
-                
-                let createdDiv = document.getElementById("docker-image-times");
-                let pTimeCreated = document.createElement("p");
-                pTimeCreated.innerHTML = images["created"][i];
-                createdDiv.appendChild(pTimeCreated);
-
+        if (req.readyState == 3) {
+            if (req.responseText != "") {
+                // Parse the response
+                const parsed = JSON.parse(req.responseText);
+                // console.log("RES: " + JSON.stringify(parsed));
+                const images = parsed["images"];
+                const containers = parsed["containers"];
+    
+                // Prep the document
+                let div = document.getElementById("docker-image-names");
+        
+                // Loop through all the images
+                for (let i = 0; i < images["repositories"].length; i++) {
+                    /* BEGIN REPO NAMES */
+                    // Replace <> with &lt; &gt;
+                    let repo = images["repositories"][i];
+                    repo = repo.replace(/</g, "&lt;");
+                    repo = repo.replace(/>/g, "&gt;");
+                    
+                    // Add to the document
+                    let pRepoName = document.createElement("p");
+                    pRepoName.innerHTML = repo;
+                    div.appendChild(pRepoName);
+                    /* END REPO NAMES */
+    
+                    /* BEGIN IMAGE TIMES */
+                    // Add the image times
+                    let createdDiv = document.getElementById("docker-image-times");
+                    let pTimeCreated = document.createElement("p");
+                    pTimeCreated.innerHTML = images["created"][i];
+                    createdDiv.appendChild(pTimeCreated);
+                    /* END IMAGE TIMES */
+    
+                }
             }
         }
+        
     }
+    
 }
 
 // Run on load
