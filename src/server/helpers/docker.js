@@ -22,11 +22,13 @@ function GetImageInfo() {
 // GetContinerInfo - Get the running container info and write to a file
 function GetContinerInfo() {
     let data = {
-        id: sendCommandAndParse("docker ps --no-trunc --format '{{json .ID}}'"),
+        // id: sendCommandAndParse("docker ps --no-trunc --format '{{json .ID}}'"),
+        id: sendCommandAndParse("docker ps --format '{{json .ID}}'"),
         image: sendCommandAndParse("docker ps --format '{{json .Image}}'"),
-        status: sendCommandAndParse("docker ps --format '{{json .Status}}'")
+        status: sendCommandAndParse("docker ps --format '{{json .Status}}'"),
+        ports: sendCommandAndParse("docker ps --format '{{json .Ports}}'")
     };
-
+    
     return data;
 }
 
@@ -37,7 +39,7 @@ function GetInfo() {
         containers: GetContinerInfo()
     };
 
-    console.log(JSON.stringify(data));
+    console.log(JSON.stringify(data)); // Important line
 }
 
 // Export necessary functions
