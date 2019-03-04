@@ -16,11 +16,6 @@ function GetImageInfo() {
         created: sendCommandAndParse("docker images --format '{{json .CreatedSince}}'")
     };
 
-    // Write to file
-    // fs.writeFile("docker.image.info", JSON.stringify(data), function (err, data) {
-    //     if (err) console.log(err);
-    // });
-
     return data;
 }
 
@@ -32,11 +27,6 @@ function GetContinerInfo() {
         status: sendCommandAndParse("docker ps --format '{{json .Status}}'")
     };
 
-    // Write to file
-    // fs.writeFile("docker.container.info", JSON.stringify(data), function (err, data) {
-    //     if (err) console.log(err);
-    // });
-
     return data;
 }
 
@@ -45,18 +35,9 @@ function GetInfo() {
     let data = {
         images: GetImageInfo(),
         containers: GetContinerInfo()
-    }
+    };
 
-    // Write to file
-    fs.writeFile("docker.info", JSON.stringify(data), function (err, data) {
-        if (err) console.log(err);
-    });
-
-    // Read and print from file
-    fs.readFile("docker.info", "utf8", function (err, contents) {
-        if (err) console.log(err);
-        console.log(contents);
-    });
+    console.log(JSON.stringify(data));
 }
 
 // Export necessary functions
