@@ -102,7 +102,7 @@ function GetDockerData() {
                     // Create the buttons
                     let logForm = document.createElement("form");
                     logForm.target = "_blank";
-                    logForm.action = "/getContainerLog";
+                    logForm.action = "/viewLog";
                     logForm.method = "post";
 
                     // The hidden input containing the container's id

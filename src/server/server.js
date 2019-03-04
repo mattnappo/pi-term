@@ -140,11 +140,20 @@ app.get("/dockerData", (req, res) => {
     logger.log(`SENT: dockerData`);
 });
 
-app.post("/getContainerLog", (req, res, next) => {
-    logger.log(`POST: getContainerLog`);
+var currentContainerId = "";
+app.post("/viewLog", (req, res, next) => {
+    logger.log(`POST: viewLog`);
+
     let containerId = req.body.id;
-    let output = common.LocalCommand("docker logs " + containerId);
-    console.log(output);
+    currentContainerId = containerId;
+
+    res.sendFile(path.resolve(__static, "log.html"));
+    logger.log(`SENT: viewLog`);
+});
+
+app.get("/getContainerLog", (req, res, next) => {
+    logger.log(`GET: getContainerLog`);
+    let output = common.LocalCommand("docker logs " + currentContainerId);
     res.send(output);
     logger.log(`SENT: getContainerLog`);
 });
