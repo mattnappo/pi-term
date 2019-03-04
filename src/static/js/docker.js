@@ -57,7 +57,8 @@ function GetDockerData() {
                 let containerDiv = document.getElementById("containers");
                 
                 // Loop through the containers
-                for (let i = 0; i < containers["id"].length; i++) {
+                console.log(containers["id"].length);
+                for (let i = 0; i < containers["id"].length - 1; i++) {
                     // Extract the container data
                     let id = containers["id"][i];
                     let imageName = containers["image"][i];
@@ -67,7 +68,7 @@ function GetDockerData() {
                     // Create the HTML element(s)
                     let container = document.createElement("div");
                     container.className = "w3-container";
-                    if (i > 0) container.style = "margin-top: 32px;";
+                    if (i > 0) container.style = "margin-top: 32px;"; // Don't add margin to the first container div
 
                     let card = document.createElement("div");
                     card.className = "w3-card";
@@ -85,17 +86,38 @@ function GetDockerData() {
                     innerContainer.className = "w3-container";
                     card.appendChild(innerContainer);
 
+                    // The actual container data
                     let pImageName = document.createElement("p");
-                    pImageName.innerHTML = imageName;
+                    pImageName.innerHTML = "Image: " + imageName;
                     innerContainer.appendChild(pImageName);
 
                     let pStatus = document.createElement("p");
-                    pStatus.innerHTML = status;
+                    pStatus.innerHTML = "Uptime: " + status;
                     innerContainer.appendChild(pStatus);
 
                     let pPorts = document.createElement("p");
-                    pPorts.innerHTML = ports;
+                    pPorts.innerHTML = "Ports: " + ports;
                     innerContainer.appendChild(pPorts);
+
+                    // Create the buttons
+                    let logForm = document.createElement("form");
+                    logForm.target = "_blank";
+                    logForm.action = "/getContainerLog";
+                    logForm.method = "post";
+
+                    // The hidden input containing the container's id
+                    let hiddenId = document.createElement("input");
+                    hiddenId.type = "hidden";
+                    hiddenId.name = "id";
+                    hiddenId.value = id;
+                    logForm.appendChild(hiddenId);
+
+                    let getLogButton = document.createElement("button");
+                    getLogButton.className = "launch-button";
+                    getLogButton.innerHTML = "View logs";
+                    
+                    logForm.appendChild(getLogButton);
+                    innerContainer.appendChild(logForm);
 
                     containerDiv.appendChild(container);
                 }

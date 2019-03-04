@@ -10,7 +10,7 @@ const logger   = require("./logger");
 const conndata = require("./data/conndata.json");
 
 // Enable logging?
-logger.enableLogging();
+// logger.enableLogging();
 logger.disableExport(); // Don't export the log
 // Show timestamps?
 // logger.raw();
@@ -130,6 +130,8 @@ app.get("/docker", (req, res) => {
     logger.log(`SENT: docker`);
 });
 
+// ----- START DOCKER ROUTES -----
+
 app.get("/dockerData", (req, res) => {
     logger.log(`GET: dockerData`);
     let output = common.LocalCommand("node $HOME/git/pi-term/src/server/helpers/helper.js --dockerinfo");
@@ -137,6 +139,17 @@ app.get("/dockerData", (req, res) => {
     res.send(output);
     logger.log(`SENT: dockerData`);
 });
+
+app.post("/getContainerLog", (req, res, next) => {
+    logger.log(`POST: getContainerLog`);
+    let containerId = req.body.id;
+    let output = common.LocalCommand("docker logs " + containerId);
+    console.log(output);
+    res.send(output);
+    logger.log(`SENT: getContainerLog`);
+});
+
+// ----- END DOCKER ROUTES -----
 
 app.get("/git", (req, res) => {
     logger.log(`GET: git`);
