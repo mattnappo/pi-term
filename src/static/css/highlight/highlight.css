@@ -1,16 +1,25 @@
 pre {
     counter-reset: lines;
-    /* background-color: #EAEEF3; /* MONO BLUE */
-    background: #f8f8ff; /* DOCCO */
-    overflow: auto;
-    max-height: 92%;
-  }
-  pre .line {
+    border-radius: 5px;
+    max-height: 85%;
+    margin-left: 16px;
+}
+
+pre .line {
     counter-increment: lines;
-  }
-  pre .line::before {
-    content: counter(lines); text-align: right;
-    display: inline-block; width: 2em;
-    padding-right: 0.5em; margin-right: 0.5em;
-    color: #BBB; border-right: solid 1px;
-  }
+}
+
+pre .line::before {
+    content: counter(lines);
+    text-align: right;
+    display: inline-block;
+    width: 2em;
+    padding-right: .5em;
+    margin-right: .5em;
+    color: #BBB;
+    border-right: solid 1px;
+}
+
+.preCode {
+    border-radius: 5px;
+}

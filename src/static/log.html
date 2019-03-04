@@ -64,49 +64,24 @@
             </ul>
         </div>
 
-        <div class="w3-container content" style="margin-left:15%">
+        <div class="w3-container content" style="margin-left:15%;margin-top:16px;">
             <div class="w3-container">
-                <h2>Git Server</h2>
+                <h2>Container log</h2>
             </div>
 
             <div class="w3-row">
                 <div class="w3-threequarter">
-                    <pre><code class="lineNumbers">
-                        // Export cpu usage to a file every minute, use later for a graph
-
-                        // GetInfo - Get the cpu info of the last hour or so
-                        function GetInfo() {
-                        
-                        }
-                        
-                        module.exports = {
-                            GetInfo: GetInfo
-                        }
-                    </code></pre>
+                    <pre><code class="lineNumbers preCode" id="log"></code></pre>
                 </div>
             </div>
 
         </div>
-
-        <!-- <div class="w3-row">
-                    
-                </div> -->
-
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
-    <script>
-        function ShowDockerDropdown() {
-            var x = document.getElementById("docker-dropdown");
-            if (x.className.indexOf("w3-show") == -1) {
-                x.className += " w3-show";
-            } else {
-                x.className = x.className.replace(" w3-show", "");
-            }
-        }
-    </script>
-
+    <script src="./js/log.js"></script>
+    
 </body>
 
 </html>
