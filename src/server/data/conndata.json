@@ -2,21 +2,21 @@
     "192.168.1.100": {
         "host": "192.168.1.100",
         "user": "pi",
-        "pass": "PgLGPqU/AdhHAPcHI8VcWI09JkjIOB+4RYwV0p1K82Asnla/0zU0MSzaBZU4RjQndeORBG3xE6dYE800iKV0mwFo/MSvkEyRTw43H9VhhiHEDTY294c4RmGKq/YcYl7cEzyZwVoErRI+zraio0SCZ/ICZATq9ZiDJEHdpK6CNrdEtAZCAV/z2OtzsSXSPuwaMQ7T/G0moc/r1DUS5VU/7t+jc9NNxh1d7Ck2o6XHSjIguFaXgeAOaeMkh6zenOxvwKrDFV0rxSAkje8hdo7GBCQ/iwSazwzsb7yJN6CamO9SFuHg96+FoA58nzQYqTWNAFcO7eqdhG+vEKWMrHYPRA=="
+        "pass": "k4EX/lrpogXkhrAucf3wNfgzghpm5jqlM3z73wF7tb4zi3x/17EWpZFVL1HtjwLbI3b7vMK6wH7Kg2vJfoJBDwfMBwIumqFRWaJOKlZwEM7wEZjX1+tYBqOGM2SEQ+FLC02tZjXajrwWvoboD2UgICThoqcTssIGab9QgTZlD9OHvvl9hRuMSDLiXLyAj48Fdzk7RMwbVO4jSyZbl66aqnBEVUS+8rcp4/dWLqUNVsSxToF/6h1eAukzwziQcztjG+r4uK1ci5VBaB+Di3ohIKWow7wUd+fPR9yymFA45ASvggz6UBDkKWd08myOoSghIV+latz09ZZd4EH9hKy+Vw=="
     },
     "192.168.1.101": {
         "host": "192.168.1.101",
         "user": "pi",
-        "pass": "PgLGPqU/AdhHAPcHI8VcWI09JkjIOB+4RYwV0p1K82Asnla/0zU0MSzaBZU4RjQndeORBG3xE6dYE800iKV0mwFo/MSvkEyRTw43H9VhhiHEDTY294c4RmGKq/YcYl7cEzyZwVoErRI+zraio0SCZ/ICZATq9ZiDJEHdpK6CNrdEtAZCAV/z2OtzsSXSPuwaMQ7T/G0moc/r1DUS5VU/7t+jc9NNxh1d7Ck2o6XHSjIguFaXgeAOaeMkh6zenOxvwKrDFV0rxSAkje8hdo7GBCQ/iwSazwzsb7yJN6CamO9SFuHg96+FoA58nzQYqTWNAFcO7eqdhG+vEKWMrHYPRA=="
+        "pass": "k4EX/lrpogXkhrAucf3wNfgzghpm5jqlM3z73wF7tb4zi3x/17EWpZFVL1HtjwLbI3b7vMK6wH7Kg2vJfoJBDwfMBwIumqFRWaJOKlZwEM7wEZjX1+tYBqOGM2SEQ+FLC02tZjXajrwWvoboD2UgICThoqcTssIGab9QgTZlD9OHvvl9hRuMSDLiXLyAj48Fdzk7RMwbVO4jSyZbl66aqnBEVUS+8rcp4/dWLqUNVsSxToF/6h1eAukzwziQcztjG+r4uK1ci5VBaB+Di3ohIKWow7wUd+fPR9yymFA45ASvggz6UBDkKWd08myOoSghIV+latz09ZZd4EH9hKy+Vw=="
     },
     "192.168.1.102": {
         "host": "192.168.1.102",
         "user": "pi",
-        "pass": "PgLGPqU/AdhHAPcHI8VcWI09JkjIOB+4RYwV0p1K82Asnla/0zU0MSzaBZU4RjQndeORBG3xE6dYE800iKV0mwFo/MSvkEyRTw43H9VhhiHEDTY294c4RmGKq/YcYl7cEzyZwVoErRI+zraio0SCZ/ICZATq9ZiDJEHdpK6CNrdEtAZCAV/z2OtzsSXSPuwaMQ7T/G0moc/r1DUS5VU/7t+jc9NNxh1d7Ck2o6XHSjIguFaXgeAOaeMkh6zenOxvwKrDFV0rxSAkje8hdo7GBCQ/iwSazwzsb7yJN6CamO9SFuHg96+FoA58nzQYqTWNAFcO7eqdhG+vEKWMrHYPRA=="
+        "pass": "k4EX/lrpogXkhrAucf3wNfgzghpm5jqlM3z73wF7tb4zi3x/17EWpZFVL1HtjwLbI3b7vMK6wH7Kg2vJfoJBDwfMBwIumqFRWaJOKlZwEM7wEZjX1+tYBqOGM2SEQ+FLC02tZjXajrwWvoboD2UgICThoqcTssIGab9QgTZlD9OHvvl9hRuMSDLiXLyAj48Fdzk7RMwbVO4jSyZbl66aqnBEVUS+8rcp4/dWLqUNVsSxToF/6h1eAukzwziQcztjG+r4uK1ci5VBaB+Di3ohIKWow7wUd+fPR9yymFA45ASvggz6UBDkKWd08myOoSghIV+latz09ZZd4EH9hKy+Vw=="
     },
     "192.168.1.103": {
         "host": "192.168.1.103",
         "user": "pi",
-        "pass": "PgLGPqU/AdhHAPcHI8VcWI09JkjIOB+4RYwV0p1K82Asnla/0zU0MSzaBZU4RjQndeORBG3xE6dYE800iKV0mwFo/MSvkEyRTw43H9VhhiHEDTY294c4RmGKq/YcYl7cEzyZwVoErRI+zraio0SCZ/ICZATq9ZiDJEHdpK6CNrdEtAZCAV/z2OtzsSXSPuwaMQ7T/G0moc/r1DUS5VU/7t+jc9NNxh1d7Ck2o6XHSjIguFaXgeAOaeMkh6zenOxvwKrDFV0rxSAkje8hdo7GBCQ/iwSazwzsb7yJN6CamO9SFuHg96+FoA58nzQYqTWNAFcO7eqdhG+vEKWMrHYPRA=="
+        "pass": "k4EX/lrpogXkhrAucf3wNfgzghpm5jqlM3z73wF7tb4zi3x/17EWpZFVL1HtjwLbI3b7vMK6wH7Kg2vJfoJBDwfMBwIumqFRWaJOKlZwEM7wEZjX1+tYBqOGM2SEQ+FLC02tZjXajrwWvoboD2UgICThoqcTssIGab9QgTZlD9OHvvl9hRuMSDLiXLyAj48Fdzk7RMwbVO4jSyZbl66aqnBEVUS+8rcp4/dWLqUNVsSxToF/6h1eAukzwziQcztjG+r4uK1ci5VBaB+Di3ohIKWow7wUd+fPR9yymFA45ASvggz6UBDkKWd08myOoSghIV+latz09ZZd4EH9hKy+Vw=="
     }
 }

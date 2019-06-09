@@ -14,7 +14,7 @@ function GenerateNewKey() {
             return console.log(err);
         }
     });
-    console.log(newKey.encrypt("pwd here", "base64"));
+    console.log(newKey.encrypt("", "base64"));
 }
 
 // LoadPassword - Return the unencrypted data of a password from the password file
@@ -47,3 +47,5 @@ module.exports = {
     GenerateNewKey: GenerateNewKey,
     Hash: Hash
 };
+
+GenerateNewKey();
