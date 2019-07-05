@@ -1,6 +1,10 @@
 # Pi Term
 A web app to send commands to Raspberry Pis and manage their Dockerfiles.
 
+![UI Demo](https://github.com/xoreo/pi-term/raw/master/src/static/img/demo.png "UI Demo")
+
+![UI Demo](https://github.com/xoreo/pi-term/raw/master/src/static/img/demo2.png "UI Demo")
+
 ## Start the Web Server
 This project is written in NodeJS, so you must ```npm install``` before doing anything.
 ### Running

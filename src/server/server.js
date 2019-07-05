@@ -105,22 +105,31 @@ app.get("/", (req, res) => {
     logger.log(`SENT: /`);
 });
 
+var loggedIn = false;
 app.post("/login", (req, res, next) => {
     logger.log(`POST: login`);
     var user = req.body.username;
     var pass = req.body.password;
     console.log(`username: ${user}\npassword: ${pass}`);
-
-    res.set("Content-Type", "text/html");
-    logger.log(`REDIRECT: login -> dashboard`);
-    res.redirect("/dashboard");
+    var correctPass = crypto.LoadPassword(pass);
+    if (pass == "password") {
+        loggedIn = true; 
+        res.set("Content-Type", "text/html");
+        logger.log(`REDIRECT: login -> dashboard`);
+        res.redirect("/dashboard");
+    }
 });
 
 app.get("/dashboard", (req, res) => {
-    logger.log(`GET: dashboard`);
-    res.set("Content-Type", "text/html");
-    res.sendFile(path.resolve(__static, "dash.html"));
-    logger.log(`SENT: dashboard`);
+    if (loggedIn == false) {
+        logger.log(`REDIRECT: login -> dashboard`);
+        res.redirect("/login");
+    } else {
+        logger.log(`GET: dashboard`);
+        res.set("Content-Type", "text/html");
+        res.sendFile(path.resolve(__static, "dash.html"));
+        logger.log(`SENT: dashboard`);
+    }
 });
 
 app.get("/docker", (req, res) => {
