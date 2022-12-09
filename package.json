@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/xoreo/pi-term#readme",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "md5": "^2.2.1",
     "node-rsa": "^1.0.2",
     "simple-ssh": "^1.0.0"
